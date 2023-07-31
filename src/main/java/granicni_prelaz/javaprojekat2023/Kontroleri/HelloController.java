@@ -1,4 +1,4 @@
-package granicni_prelaz.javaprojekat2023;
+package granicni_prelaz.javaprojekat2023.Kontroleri;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
