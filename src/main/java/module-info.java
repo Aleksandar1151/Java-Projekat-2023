@@ -4,7 +4,10 @@ module granicni_prelaz.javaprojekat2023 {
 
 
 
+
     
+
+
 
     opens granicni_prelaz.javaprojekat2023 to javafx.fxml;
     exports granicni_prelaz.javaprojekat2023;
