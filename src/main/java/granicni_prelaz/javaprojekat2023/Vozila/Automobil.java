@@ -5,7 +5,8 @@ import java.util.Random;
 public class Automobil extends Vozilo{
     static int id = 1;
     Automobil() {
-        super("Auto " + id);
+        super("A " + id);
+        id++;
     }
 
     void kreirajPutnike()
