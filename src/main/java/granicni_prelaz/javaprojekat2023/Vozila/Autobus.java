@@ -13,7 +13,8 @@ public class Autobus extends Vozilo{
     public List<Putnik> putnici;
 
     Autobus() {
-        super("Autobus " + id);
+        super("B " + id);
+        id++;
         kreirajPutnike();
 
     }
