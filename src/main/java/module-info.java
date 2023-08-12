@@ -1,16 +1,12 @@
 module granicni_prelaz.javaprojekat2023 {
     requires javafx.controls;
     requires javafx.fxml;
-
-
-
-
-
-
+    requires java.logging;
+    requires json.simple;
 
 
     opens granicni_prelaz.javaprojekat2023 to javafx.fxml;
     exports granicni_prelaz.javaprojekat2023;
-    exports granicni_prelaz.javaprojekat2023.Kontroleri;
-    opens granicni_prelaz.javaprojekat2023.Kontroleri to javafx.fxml;
+    exports granicni_prelaz.javaprojekat2023.controllers;
+    opens granicni_prelaz.javaprojekat2023.controllers to javafx.fxml;
 }
