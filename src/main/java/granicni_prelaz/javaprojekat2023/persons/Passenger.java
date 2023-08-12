@@ -2,9 +2,9 @@ package granicni_prelaz.javaprojekat2023.persons;
 
 public class Passenger extends Person {
 
-    public Passenger()
+    public Passenger(String vehicleName)
     {
-        super();
+        super(vehicleName);
     }
 
 }

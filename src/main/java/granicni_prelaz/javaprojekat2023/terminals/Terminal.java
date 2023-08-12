@@ -5,28 +5,28 @@ import granicni_prelaz.javaprojekat2023.vozila.Vehicle;
 public abstract class Terminal {
 
     String terminalName;
-    boolean terminalZauzet;
-    boolean terminalUFunkciji;
+    boolean isBusy;
+    boolean isInFunction;
 
-    Vehicle vozilo;
+    Vehicle vehicle;
 
     public abstract void procesirajVozilo();
 
-    public void setTerminalUFunkciji(boolean terminalUFunkciji) {
-        this.terminalUFunkciji = terminalUFunkciji;
+    public void setInFunction(boolean inFunction) {
+        this.isInFunction = inFunction;
     }
 
-    public void setTerminalZauzet(boolean terminalZauzet) {
-        this.terminalZauzet = terminalZauzet;
+    public void setBusy(boolean busy) {
+        this.isBusy = busy;
     }
 
-    public void setVozilo(Vehicle vozilo) {
-        this.vozilo = vozilo;
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 
-    protected boolean provjeriZauzetost()
+    protected boolean checkIfBusy()
     {
-        return vozilo == null;
+        return vehicle == null;
     }
 
 

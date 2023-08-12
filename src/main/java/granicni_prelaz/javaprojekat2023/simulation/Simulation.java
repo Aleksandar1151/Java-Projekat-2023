@@ -8,6 +8,7 @@ import granicni_prelaz.javaprojekat2023.util.SimulationLogger;
 import granicni_prelaz.javaprojekat2023.vozila.Vehicle;
 
 import java.lang.invoke.VarHandle;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 import java.util.logging.Level;
@@ -15,8 +16,8 @@ import java.util.logging.Level;
 public class Simulation {
 
     public static final PathOnMap pathWithTerminals = initPath(Constants.PATH_ON_MAP);
-    public static List<Vehicle> columnOfVehicles;
-    Queue<Vehicle> redVozila;
+    public static List<Vehicle> columnOfVehicles = new ArrayList<>(50);
+    Queue<Vehicle> queueVehicles;
     //List<Polje> listaPolja;
 
     private static PathOnMap initPath(String pathName) {

@@ -1,29 +1,35 @@
 package granicni_prelaz.javaprojekat2023.vozila;
 
+import granicni_prelaz.javaprojekat2023.constants.Constants;
 import granicni_prelaz.javaprojekat2023.gadgets.Suitcase;
-import granicni_prelaz.javaprojekat2023.persons.Passenger;
 
 import java.util.List;
 import java.util.Random;
 
 public class Bus extends Vehicle {
-    static int id = 1;
+    static int ID_Counter = 0;
+    int id;
+    public List<Suitcase> passengerSuitcases;
 
-    public List<Suitcase> koferiPutnika;
-    public List<Passenger> putnici;
 
-    Bus() {
-        super("B " + id);
-        id++;
-        kreirajPutnike();
+    public Bus() {
+        super("B " + ID_Counter, Constants.MAX_BUS_PASSENGER);
+        id = ID_Counter++;
+        createSuitcases();
 
     }
 
-    void kreirajPutnike()
-    {
+    private void createSuitcases() {
         Random rnd = new Random();
-        if(rnd.nextInt(100) > 30)
-        {
+        for (int i = 0; i < passengers.size(); i++)
+            if (rnd.nextInt(100) > 30) {
+                passengers.get(i).setSuitcase(new Suitcase(passengers.get(i).getId()));
+            }
+    }
+
+    void kreirajPutnike() {
+        Random rnd = new Random();
+        if (rnd.nextInt(100) > 30) {
             //kofer = new Kofer();
         }
 

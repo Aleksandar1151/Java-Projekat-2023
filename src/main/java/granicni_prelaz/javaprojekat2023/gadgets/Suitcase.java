@@ -4,23 +4,23 @@ import java.util.Random;
 
 public class Suitcase {
 
-    int ID_putnika;
-    boolean imaNedozvoljeneStvari;
+    int personID;
+    boolean hasIlligalThings;
 
-    Suitcase(int ID_putnika)
+    public Suitcase(int personID)
     {
-        this.ID_putnika = ID_putnika;
+        this.personID = personID;
         Random rnd = new Random();
 
         if(rnd.nextInt(100) < 10)
         {
-            imaNedozvoljeneStvari = true;
+            hasIlligalThings = true;
         }
     }
 
-    public boolean getImaNedozvoljeneStvari()
+    public boolean getHasIlligalThings()
     {
-        return imaNedozvoljeneStvari;
+        return hasIlligalThings;
     }
 
 }

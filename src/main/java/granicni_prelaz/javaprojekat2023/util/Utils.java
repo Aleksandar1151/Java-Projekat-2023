@@ -48,7 +48,7 @@ public abstract class Utils {
 
     public static Label createLabel() {
 
-        return createLabel(Constants.RED);
+        return createLabel(Constants.GRAY);
     }
 
     public static void setWhiteLabelsIntoMap(List<Field> pathfields, GridPane gridPane) {

@@ -4,17 +4,17 @@ import java.util.Random;
 
 public class IdentificationDocument {
 
-    int ID_osobe;
-    boolean jeValidan;
+    int personID;
+    boolean isValid;
 
-    public IdentificationDocument(int ID_osobe)
+    public IdentificationDocument(int personID)
     {
-        this.ID_osobe = ID_osobe;
+        this.personID = personID;
         Random rnd = new Random();
 
         if(rnd.nextInt(100) > 3)
         {
-            jeValidan = true;
+            isValid = true;
         }
 
     }

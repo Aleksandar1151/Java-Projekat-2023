@@ -14,17 +14,22 @@ import granicni_prelaz.javaprojekat2023.util.Utils;
 import granicni_prelaz.javaprojekat2023.vozila.Bus;
 import granicni_prelaz.javaprojekat2023.vozila.Car;
 import granicni_prelaz.javaprojekat2023.vozila.Vehicle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Paint;
 
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
+import java.util.zip.GZIPInputStream;
 
 public class SimulationController  implements Initializable {
     private Simulation simulation;
@@ -48,6 +53,9 @@ public class SimulationController  implements Initializable {
     @FXML
     private Label lblTime;
 
+
+    public static GridPane _gpColumnOfVehiclesWithTerminals;
+
     @FXML
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
@@ -55,6 +63,9 @@ public class SimulationController  implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        _gpColumnOfVehiclesWithTerminals = gpColumnOfVehiclesWithTerminals;
+
         try {
            // watcher.start();
             setSimulationController();
@@ -83,10 +94,7 @@ public class SimulationController  implements Initializable {
         Field field;
         for (int i = 0; i < 10; i++) {
             field = pathfields.get(i);
-
             Label fieldLabel = Utils.createLabel();
-
-
             gpColumnOfVehiclesWithTerminals.add(fieldLabel, field.getYPosition(), field.getXPosition());
         }
 
@@ -108,5 +116,26 @@ public class SimulationController  implements Initializable {
     }
 
     public void startButtonClicked(ActionEvent actionEvent) {
+
+            Vehicle testVehicle = new Car();
+            testVehicle.start();
+
     }
+
+    public static void placeVehicleOnPosition(Vehicle vehicle ,int y, int x)
+    {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                Label fieldLabel = Utils.createLabel();
+                fieldLabel.setText(vehicle.getVehicleName());
+                fieldLabel.setTextFill(Paint.valueOf("white"));
+                fieldLabel.setBackground(new Background(new BackgroundFill(Paint.valueOf(Constants.RED), null, null)));
+                _gpColumnOfVehiclesWithTerminals.add(fieldLabel, y, x);
+            }
+        });
+
+    }
+
+
 }

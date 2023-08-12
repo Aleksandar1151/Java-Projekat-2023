@@ -8,16 +8,23 @@ import java.util.Random;
 public abstract class Person {
 
     static int ID_Counter = 1;
-    int ID;
-    Suitcase kofer;
-    IdentificationDocument identifikacioniDokument;
-
-    Person()
+    int id;
+    Suitcase suitcase;
+    IdentificationDocument identificationDocument;
+    String vehicleName;
+    Person(String vehicleName)
     {
         Random rnd = new Random();
-        ID = ID_Counter++;
+        identificationDocument = new IdentificationDocument(ID_Counter);
+        id = ID_Counter++;
+        this.vehicleName = vehicleName;
+    }
 
-        identifikacioniDokument = new IdentificationDocument(ID);
+    public int getId() {
+        return id;
+    }
 
+    public void setSuitcase(Suitcase suitcase) {
+        this.suitcase = suitcase;
     }
 }
