@@ -56,7 +56,7 @@
         </VBox>
     </top>
     <center>
-        <GridPane fx:id="gpColumnOfVehiclesWithTerminals" alignment="CENTER" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="460.0" style="-fx-background-color: #ffffff; -fx-border-color: #ffffff;" BorderPane.alignment="CENTER">
+        <GridPane fx:id="gpColumnOfVehiclesWithTerminals" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="460.0" style="-fx-background-color: #ffffff; -fx-border-color: #ffffff;" BorderPane.alignment="CENTER">
             <BorderPane.margin>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </BorderPane.margin>
@@ -210,7 +210,7 @@
                 <Insets bottom="30.0" />
             </BorderPane.margin>
          <children>
-            <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="62.0" prefWidth="174.0" style="-fx-background-color: #EB5E28;" text="KOLONA" textFill="WHITE">
+            <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#onBtnColumnOfVehiclesClicked" prefHeight="62.0" prefWidth="174.0" style="-fx-background-color: #EB5E28;" text="KOLONA" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>

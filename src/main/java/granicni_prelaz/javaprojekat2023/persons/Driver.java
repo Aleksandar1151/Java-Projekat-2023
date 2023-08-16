@@ -7,4 +7,10 @@ public class Driver extends Person {
         super(vehicleName);
     }
 
+
+    public String toString()
+    {
+        return "V[" + vehicleName +"]";
+    }
+
 }

@@ -13,7 +13,7 @@ public class Truck extends Vehicle{
 
     public Truck()
     {
-        super(("K"+ ID_Counter), Constants.BROJ_KAMIONA);
+        super(("K "+ ID_Counter), Constants.MAX_TRUCK_PASSENGER);
         id = ID_Counter++;
         Random rnd = new Random();
         if(rnd.nextInt(100)>50)
@@ -25,5 +25,13 @@ public class Truck extends Vehicle{
             realWeight = declaredWeight * factor;
             customsDocumentation = new CustomsDocumentation(declaredWeight);
         }
+    }
+
+    public double getRealWeight() {
+        return realWeight;
+    }
+
+    public CustomsDocumentation getCustomsDocumentation() {
+        return customsDocumentation;
     }
 }

@@ -6,4 +6,8 @@ public class CustomsDocumentation {
     {
         this.declaredWeight = declaredWeight;
     }
+
+    public double getDeclaredWeight() {
+        return declaredWeight;
+    }
 }

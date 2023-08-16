@@ -19,5 +19,12 @@ public class IdentificationDocument {
 
     }
 
+    public boolean isValid() {
+        return isValid;
+    }
 
+    public String toString()
+    {
+        return "Dokument " + (isValid ? "je" : "nije") + " validan." ;
+    }
 }

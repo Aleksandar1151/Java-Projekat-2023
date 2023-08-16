@@ -1,6 +1,7 @@
 package granicni_prelaz.javaprojekat2023.map;
 
 import granicni_prelaz.javaprojekat2023.map.Field;
+import granicni_prelaz.javaprojekat2023.vozila.Vehicle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,17 @@ public class PathOnMap {
 
     public List<Field> getPathFields() {
         return pathFields;
+    }
+
+    public void setVehicleOnPosition(Vehicle vehicle, int position)
+    {
+        Field field;
+
+        field = pathFields.get(position+1);
+        field.setVehicle(null);
+
+        field = pathFields.get(position);
+        field.setVehicle(vehicle);
     }
 
 }

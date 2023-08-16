@@ -27,4 +27,17 @@ public abstract class Person {
     public void setSuitcase(Suitcase suitcase) {
         this.suitcase = suitcase;
     }
+
+    public IdentificationDocument getIdentificationDocument() {
+        return identificationDocument;
+    }
+
+    public Suitcase getSuitcase() {
+        return suitcase;
+    }
+
+    public String toString()
+    {
+        return "P"+id+" " + identificationDocument + ((suitcase == null ) ? "" : suitcase) ;
+    }
 }

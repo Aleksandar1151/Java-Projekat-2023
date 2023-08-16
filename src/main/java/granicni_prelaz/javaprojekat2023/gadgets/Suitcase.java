@@ -23,4 +23,8 @@ public class Suitcase {
         return hasIlligalThings;
     }
 
+    public String toString()
+    {
+        return "Kofer " + (hasIlligalThings ? " ima" : " nema") + " nedozvoljene stvari." ;
+    }
 }
