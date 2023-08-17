@@ -96,7 +96,7 @@
                 </Label>
             <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="206.0" prefWidth="182.0">
                <children>
-                  <Label prefHeight="18.0" prefWidth="229.0" text="P1 : obrađuje V1" textAlignment="CENTER">
+                  <Label fx:id="p1Terminal" prefHeight="18.0" prefWidth="229.0" text="P1 : obrađuje V1" textAlignment="CENTER">
                      <font>
                         <Font name="Arial Italic" size="15.0" />
                      </font>
@@ -107,7 +107,7 @@
                         <Insets bottom="5.0" />
                      </padding>
                   </Label>
-                  <Label prefHeight="18.0" prefWidth="229.0" text="P1 : obrađuje V1" textAlignment="CENTER">
+                  <Label fx:id="p2Terminal" prefHeight="18.0" prefWidth="229.0" text="P1 : obrađuje V1" textAlignment="CENTER">
                      <font>
                         <Font name="Arial Italic" size="15.0" />
                      </font>
@@ -118,7 +118,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label prefHeight="18.0" prefWidth="229.0" text="P1 : obrađuje V1" textAlignment="CENTER">
+                  <Label fx:id="pkTerminal" prefHeight="18.0" prefWidth="229.0" text="P1 : obrađuje V1" textAlignment="CENTER">
                      <font>
                         <Font name="Arial Italic" size="15.0" />
                      </font>
@@ -129,7 +129,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label prefHeight="18.0" prefWidth="229.0" text="P1 : obrađuje V1" textAlignment="CENTER">
+                  <Label fx:id="cTerminal" prefHeight="18.0" prefWidth="229.0" text="P1 : obrađuje V1" textAlignment="CENTER">
                      <font>
                         <Font name="Arial Italic" size="15.0" />
                      </font>
@@ -140,7 +140,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label prefHeight="18.0" prefWidth="229.0" text="P1 : obrađuje V1" textAlignment="CENTER">
+                  <Label fx:id="ckTerminal" prefHeight="18.0" prefWidth="229.0" text="P1 : obrađuje V1" textAlignment="CENTER">
                      <font>
                         <Font name="Arial Italic" size="15.0" />
                      </font>
@@ -156,7 +156,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </VBox>
-                <Button alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#dugmePrikazListeClick" prefHeight="50.0" prefWidth="154.0" style="-fx-background-color: #EB5E28;" text="Policijska evidencija" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+                <Button alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnPoliceRecordsClick" prefHeight="50.0" prefWidth="154.0" style="-fx-background-color: #EB5E28;" text="Policijska evidencija" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" wrapText="true">
                     <VBox.margin>
                         <Insets bottom="10.0" top="10.0" />
                     </VBox.margin>
@@ -164,7 +164,7 @@
                   <Font name="Arial" size="18.0" />
                </font>
                 </Button>
-            <Button alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#dugmePrikazListeClick" prefHeight="50.0" prefWidth="154.0" style="-fx-background-color: #EB5E28;" text="Carinska evidencija" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+            <Button alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnCustomsRecordsClick" prefHeight="50.0" prefWidth="154.0" style="-fx-background-color: #EB5E28;" text="Carinska evidencija" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" wrapText="true">
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
@@ -172,7 +172,7 @@
                   <Font name="Arial" size="18.0" />
                </font>
             </Button>
-            <Button alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#dugmePrikazListeClick" prefHeight="50.0" prefWidth="154.0" style="-fx-background-color: #EB5E28;" text="Terminali" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+            <Button alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnTerminalFileClick" prefHeight="50.0" prefWidth="154.0" style="-fx-background-color: #EB5E28;" text="Terminali" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" wrapText="true">
                <font>
                   <Font name="Arial" size="18.0" />
                </font>
@@ -194,7 +194,7 @@
                   <Insets bottom="5.0" />
                </VBox.margin>
             </Label>
-                <ListView fx:id="ui_listView" prefHeight="477.0" prefWidth="187.0" />
+                <ListView fx:id="lvVehicles" onMouseClicked="#onLvItemClicked" prefHeight="477.0" prefWidth="187.0" />
             </children>
             <BorderPane.margin>
                 <Insets bottom="2.0" left="5.0" right="2.0" top="2.0" />

@@ -22,17 +22,19 @@ public class PoliceTerminal extends Terminal {
         super(terminalName,  position);
     }
 
+
+
+
     @Override
     public void processVehicle() throws InterruptedException {
 
-        System.out.println("processVehicle " + vehicle.getVehicleName());
-        Field field = Simulation.pathWithTerminals.getPathFields().get(position);
-        SimulationController.placeVehicleOnPosition(vehicle,field);
+        printInfo("Obrađuje vozilo: " + vehicle.getVehicleName());
+
 
         if (vehicle instanceof Bus)
-            Thread.sleep(100);
+            Thread.sleep(3000);
         else
-            Thread.sleep(500);
+            Thread.sleep(2000);
 
         IdentificationDocument identificationDocument = vehicle.getDriver().getIdentificationDocument();
 
@@ -40,7 +42,6 @@ public class PoliceTerminal extends Terminal {
             ejectVehicle();
         else {
             System.out.println("Passengers in bus: "+vehicle.getPassengers().size());
-
 
             for (Passenger passenger : new ArrayList<>(vehicle.getPassengers()) ) {
                 identificationDocument = passenger.getIdentificationDocument();
@@ -51,7 +52,7 @@ public class PoliceTerminal extends Terminal {
 
 
         }
-
+        printInfo("Završena obrada vozila: " + vehicle.getVehicleName());
 
     }
 
@@ -65,20 +66,32 @@ public class PoliceTerminal extends Terminal {
         vehicle.getPassengers().remove(passenger);
         Simulation.policeRecord.addPerson(passenger);
 
+
+
     }
 
     @Override
     void ejectVehicle() {
+
+
         vehicle.setEjected(true);
         Simulation.policeRecord.addPerson(vehicle.getDriver());
-        for (Passenger passenger: vehicle.getPassengers() ) {
+        for (Passenger passenger: new ArrayList<>(vehicle.getPassengers()) ) {
             ejectPassenger(passenger);
         }
         setVehicle(null);
         if(Simulation.queueVehicles.peek() == vehicle)
             Simulation.queueVehicles.remove();
     }
+    @Override
+    public void printInfo(String text) {
+        SimulationController.changeTextOfTerminal(this, text);
+    }
 
 
-
+    @Override
+    public void setInFunction(boolean inFunction) {
+        super.setInFunction(inFunction);
+        printInfo((inFunction) ? "U funkciji" : "Nije u funkciji.");
+    }
 }

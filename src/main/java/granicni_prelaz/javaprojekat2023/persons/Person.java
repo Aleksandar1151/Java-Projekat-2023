@@ -36,6 +36,11 @@ public abstract class Person {
         return suitcase;
     }
 
+    public boolean hasSuitcase()
+    {
+        return suitcase != null;
+    }
+
     public String toString()
     {
         return "P"+id+" " + identificationDocument + ((suitcase == null ) ? "" : suitcase) ;

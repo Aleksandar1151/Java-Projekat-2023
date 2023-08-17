@@ -3,6 +3,7 @@ module granicni_prelaz.javaprojekat2023 {
     requires javafx.fxml;
     requires java.logging;
     requires json.simple;
+    requires java.desktop;
 
 
     opens granicni_prelaz.javaprojekat2023 to javafx.fxml;

@@ -34,4 +34,9 @@ public class Truck extends Vehicle{
     public CustomsDocumentation getCustomsDocumentation() {
         return customsDocumentation;
     }
+
+     public boolean hasCustomDocumentation()
+    {
+        return customsDocumentation != null;
+    }
 }

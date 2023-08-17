@@ -7,6 +7,7 @@ import granicni_prelaz.javaprojekat2023.map.Field;
 import granicni_prelaz.javaprojekat2023.persons.Passenger;
 import granicni_prelaz.javaprojekat2023.persons.Driver;
 import granicni_prelaz.javaprojekat2023.simulation.Simulation;
+import granicni_prelaz.javaprojekat2023.terminals.CustomsTerminal;
 import granicni_prelaz.javaprojekat2023.terminals.PoliceTerminal;
 import granicni_prelaz.javaprojekat2023.util.Utils;
 import javafx.application.Platform;
@@ -42,11 +43,13 @@ public abstract class Vehicle extends Thread{
     public void run()
     {
         List<Field> pathfields = Simulation.pathWithTerminals.getPathFields();
-        PoliceTerminal policeTerminal;
+        PoliceTerminal policeTerminal = Simulation.policeTerminals.get(0);
+        CustomsTerminal customsTerminal = Simulation.customsTerminals.get(0);
 
         boolean finishedPoliceTerminal = false;
+        boolean finishedCustomsTerminal = false;
 
-
+        //KRETANJE U KOLONI
         while(true)
         {
             if(position < Constants.NUMBER_OF_ELEMENTS_AT_FIRST_MAP)
@@ -91,7 +94,7 @@ public abstract class Vehicle extends Thread{
         }
         pathfields.get(position).setVehicle(null);
 
-
+        //ULAZAK U POLICIJSKI TERMINAL
         while(!finishedPoliceTerminal)
         {
 
@@ -102,17 +105,24 @@ public abstract class Vehicle extends Thread{
                 for (PoliceTerminal pt: Simulation.policeTerminals ) {
 
 
-                    if(!pt.isBusy() && pt.acceptVehicle(this) && pt.isInFunction())
+                    if(!pt.hasVehicle() && pt.acceptVehicle(this) && pt.isInFunction())
                     {
+                        Field field = pathfields.get(pt.getPosition());
+                        SimulationController.placeVehicleOnPosition(this,field);
                         SimulationController.placeEmptyOnPosition(pathfields.get(position));
+                        position = pt.getPosition();
                         Simulation.queueVehicles.remove();
 
                         policeTerminal = pt;
-                        pt.setVehicle(this);
+                        //pt.setVehicle(this);
                         try {
-                            pt.setBusy(true);
+                            pt.setVehicle(this);
+
+                            System.out.println("Driver: " + driver);
+                            //pt.setBusy(true);
                             pt.processVehicle();
-                            pt.setBusy(false);
+                            //pt.setBusy(false);
+                           // pt.setVehicle(null);
                         } catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }
@@ -128,6 +138,45 @@ public abstract class Vehicle extends Thread{
 
         }
 
+        if(isEjected) interrupt();
+
+        while(!finishedCustomsTerminal)
+        {
+            for (CustomsTerminal ct: Simulation.customsTerminals ) {
+
+                if(!ct.hasVehicle() && ct.acceptVehicle(this) && ct.isInFunction())
+                {
+                    policeTerminal.setVehicle(null);
+
+                    SimulationController.placeVehicleOnPosition(this,pathfields.get(ct.getPosition()));
+                    SimulationController.placeTerminalOnPosition(policeTerminal,pathfields.get(policeTerminal.getPosition()));
+                    position = ct.getPosition();
+                    customsTerminal = ct;
+
+
+
+                    try {
+                        ct.setVehicle(this);
+                        ct.processVehicle();
+                        ct.setVehicle(null);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    finishedCustomsTerminal = true;
+                    break;
+
+                }
+                else {
+                    //System.out.println(this.getVehicleName() + " čeka...");
+                }
+
+
+            }
+
+        }
+
+        SimulationController.placeTerminalOnPosition(customsTerminal,pathfields.get(customsTerminal.getPosition()));
         System.out.println(getVehicleName() + " je prosao granicu.");
 
 
@@ -164,5 +213,17 @@ public abstract class Vehicle extends Thread{
 
     public int getPosition() {
         return position;
+    }
+
+    public String  toString()
+    {
+        String string = vehicleName + "\n";
+        string +="Vozac["+ getDriver()+"]\n";
+        string += "Putnici:\n";
+        for (Passenger passenger: passengers  ) {
+            string += passenger + "\n";
+        }
+
+        return string ;
     }
 }

@@ -12,7 +12,7 @@ public abstract class Constants {
     public static final int NUUMBER_OF_BUSES = 5;
     public static final int NUMBER_OF_TRUCKS = 10;
 
-    public static final int SPEED_OF_VEHICLES = 1000;
+    public static final int SPEED_OF_VEHICLES = 2000;
 
     public static final String FAJL_TERMINALI = "";
     public static final String FAJL_EVIDENCIJA_NEPRELSAKA = "";

@@ -27,6 +27,7 @@ public abstract class Terminal {
         this.position = position;
         this.isBusy = false;
         this.isInFunction = true;
+        this.vehicle = null;
     }
 
 
@@ -41,6 +42,11 @@ public abstract class Terminal {
 
     public boolean isBusy() {
         return isBusy;
+    }
+
+    public boolean hasVehicle()
+    {
+        return (vehicle == null) ? false : true;
     }
 
     public void setVehicle(Vehicle vehicle) {
@@ -68,4 +74,5 @@ public abstract class Terminal {
         return terminalName;
     }
 
+    public abstract void printInfo(String text);
 }

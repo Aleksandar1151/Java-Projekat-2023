@@ -16,6 +16,7 @@ import granicni_prelaz.javaprojekat2023.vozila.Truck;
 import granicni_prelaz.javaprojekat2023.vozila.Vehicle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,12 +25,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -37,6 +40,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.zip.GZIPInputStream;
+import java.awt.Desktop;
 
 public class SimulationController  implements Initializable {
     private Simulation simulation;
@@ -60,6 +64,28 @@ public class SimulationController  implements Initializable {
     @FXML
     private Label lblTime;
 
+    @FXML
+    private Label p1Terminal;
+    @FXML
+    private Label p2Terminal;
+    @FXML
+    private Label pkTerminal;
+    @FXML
+    private Label cTerminal;
+    @FXML
+    private Label ckTerminal;
+
+
+    public static Label _p1Terminal;
+
+    public static Label _p2Terminal;
+
+    public static Label _pkTerminal;
+
+    public static Label _cTerminal;
+
+    public static Label _ckTerminal;
+
 
     public static GridPane _gpColumnOfVehiclesWithTerminals;
 
@@ -75,6 +101,15 @@ public class SimulationController  implements Initializable {
 
         _gpColumnOfVehiclesWithTerminals = gpColumnOfVehiclesWithTerminals;
 
+        _p1Terminal = p1Terminal;
+        _p2Terminal = p2Terminal;
+        _pkTerminal = pkTerminal;
+        _cTerminal = cTerminal;
+        _ckTerminal = ckTerminal;
+
+
+
+
         try {
            // watcher.start();
             setSimulationController();
@@ -83,7 +118,10 @@ public class SimulationController  implements Initializable {
             SimulationLogger.log(this.getClass(), Level.SEVERE, exception.getMessage(), exception);
             System.exit(1);
         }
+
+        setListViewOfVehicles();
     }
+
 
     private void setSimulationController() throws FileLoadingException {
         simulationStarted = false;
@@ -162,10 +200,41 @@ public class SimulationController  implements Initializable {
         for (int i = 0; i < Constants.NUMBER_OF_VEHICLES; i++) {
             Label labelVehicle = new Label("lblVehicle" + i + 1);
             Vehicle vehicle = Simulation.columnOfVehicles.get(i);
-            Utils.setLabelListView(labelVehicle, vehicle.getVehicleName(), vehicle instanceof Car ? Constants.RED : (vehicle instanceof Bus ? Constants.GREEN : Constants.BLUE));
+            Utils.setLabelListView(labelVehicle, vehicle.getVehicleName(), vehicle instanceof Car ? Constants.COLOR_CAR : (vehicle instanceof Bus ? Constants.COLOR_BUS : Constants.COLOR_TRUCK));
             lvVehicles.getItems().add(labelVehicle);
         }
 
+    }
+
+    @FXML
+    public void onLvItemClicked(MouseEvent event) {
+        if (lvVehicles.getSelectionModel().getSelectedIndex() != -1) {
+            int vehicleIndex = lvVehicles.getSelectionModel().getSelectedIndex();
+            Vehicle vehicle = Simulation.columnOfVehicles.get(vehicleIndex);
+            //Open new stage
+            try {
+
+                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("vehicleView.fxml"));
+
+                Stage stage = new Stage();
+                Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+                VehicleController vehicleController = fxmlLoader.getController();
+                vehicleController.initInfo(vehicle);
+
+
+
+                stage.setResizable(false);
+                stage.centerOnScreen();
+                stage.setScene(scene);
+                stage.show();
+                stage.onCloseRequestProperty().set(event1 -> unselectListViewItem());
+            } catch (IOException exception) {
+                SimulationLogger.logAsync(getClass(), exception);
+            }
+        }
+    }
+    public void unselectListViewItem() {
+        lvVehicles.getSelectionModel().clearSelection();
     }
 
 
@@ -238,6 +307,41 @@ public class SimulationController  implements Initializable {
     }
 
 
+    public static void changeTextOfTerminal(Terminal terminal, String text)
+    {
+
+        switch (terminal.getPosition())
+        {
+            case 0:
+                terminalTextChanger(_cTerminal ,terminal.getTerminalName() + ": " +text);
+                break;
+            case 1:
+                terminalTextChanger(_ckTerminal ,terminal.getTerminalName() + ": " +text);
+                break;
+            case 2:
+                terminalTextChanger(_p1Terminal ,terminal.getTerminalName() + ": " +text);
+                break;
+            case 3:
+                terminalTextChanger(_p2Terminal ,terminal.getTerminalName() + ": " +text);
+                break;
+            case 4:
+                terminalTextChanger(_pkTerminal ,terminal.getTerminalName() + ": " +text);
+                break;
+
+
+        }
+    }
+
+    static void terminalTextChanger(Label label, String text)
+    {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                label.setText(text);
+            }
+        });
+    }
+
+
 
     private void LoadColumnOfVehiclesView()
     {
@@ -254,5 +358,58 @@ public class SimulationController  implements Initializable {
         stage.show();
     }
 
+    @FXML
+    void btnCustomsRecordsClick(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("customsRecordView.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException exception) {
+            SimulationLogger.logAsync(getClass(), exception);
+        }
+
+    }
+
+    @FXML
+    void btnPoliceRecordsClick(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("policeRecordView.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException exception) {
+            SimulationLogger.logAsync(getClass(), exception);
+        }
+    }
+
+    @FXML
+    void btnTerminalFileClick(ActionEvent event) {
+        String folderPath = "Terminals";
+        String fileName = "terminals.txt";
+
+        // Create a File object for the text file
+        File textFile = new File(folderPath, fileName);
+
+        // Check if the Desktop API is supported
+        if (Desktop.isDesktopSupported()) {
+            Desktop desktop = Desktop.getDesktop();
+
+            // Check if opening files is supported
+            if (desktop.isSupported(Desktop.Action.OPEN)) {
+                try {
+                    desktop.open(textFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("Opening files is not supported on this platform.");
+            }
+        } else {
+            System.out.println("Desktop API is not supported on this platform.");
+        }
+    }
 
 }

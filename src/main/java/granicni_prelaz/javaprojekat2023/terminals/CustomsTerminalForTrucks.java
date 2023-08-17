@@ -5,6 +5,8 @@ import granicni_prelaz.javaprojekat2023.simulation.Simulation;
 import granicni_prelaz.javaprojekat2023.vozila.Truck;
 import granicni_prelaz.javaprojekat2023.vozila.Vehicle;
 
+import java.util.ArrayList;
+
 public class CustomsTerminalForTrucks extends CustomsTerminal {
 
     public CustomsTerminalForTrucks(String terminalName, int position)
@@ -19,18 +21,20 @@ public class CustomsTerminalForTrucks extends CustomsTerminal {
     @Override
     public void processVehicle()
     {
+        printInfo("Obrađuje vozilo: " + vehicle.getVehicleName());
         Truck truck = (Truck) vehicle;
-        if(truck.getRealWeight() > truck.getCustomsDocumentation().getDeclaredWeight())
+        if(truck.hasCustomDocumentation() && truck.getRealWeight() > truck.getCustomsDocumentation().getDeclaredWeight())
         {
             ejectVehicle();
         }
+        printInfo("Završena obrada vozila: " + vehicle.getVehicleName());
     }
 
     void ejectVehicle() {
 
         vehicle.setEjected(true);
         Simulation.customsRecord.add(vehicle.getDriver().toString() + " je izbacen jer nema ispravnu carinsku dokumentaciju.");
-        for (Passenger passenger: vehicle.getPassengers() ) {
+        for (Passenger passenger: new ArrayList<>(vehicle.getPassengers()) ) {
             ejectPassenger(passenger);
         }
         setVehicle(null);
@@ -39,4 +43,5 @@ public class CustomsTerminalForTrucks extends CustomsTerminal {
             Simulation.queueVehicles.remove();
 
     }
+
 }

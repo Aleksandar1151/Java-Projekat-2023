@@ -69,7 +69,7 @@ public class Simulation {
 
         if (vehicleType instanceof Car)
             for (int i = 0; i < Constants.NUMBER_OF_CARS; i++)
-                queueVehicles.add(new Bus());
+                queueVehicles.add(new Car());
 
 
         if (vehicleType instanceof Bus)
@@ -78,7 +78,7 @@ public class Simulation {
 
         if (vehicleType instanceof Truck)
             for (int i = 0; i < Constants.NUMBER_OF_TRUCKS; i++)
-                queueVehicles.add(new Bus());
+                queueVehicles.add(new Truck());
 
     }
 
