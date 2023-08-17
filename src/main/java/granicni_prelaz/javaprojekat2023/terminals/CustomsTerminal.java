@@ -19,16 +19,23 @@ public class CustomsTerminal extends Terminal{
     @Override
     public void processVehicle() throws InterruptedException {
 
+        Vehicle vehicle = this.vehicle;
         printInfo("Obrađuje vozilo: " + vehicle.getVehicleName());
-        if(vehicle instanceof Car) Thread.sleep(2000);
-        else {
-            for (Passenger passenger : new ArrayList<>(vehicle.getPassengers())) {
-                if(passenger.hasSuitcase() && passenger.getSuitcase().getHasIlligalThings())
-                    ejectPassenger(passenger);
-            }
-        }
 
-        Thread.sleep(2000);
+        try
+        {
+            if(vehicle instanceof Car) Thread.sleep(2000);
+            else {
+                for (Passenger passenger : new ArrayList<>(vehicle.getPassengers())) {
+                    if(passenger.hasSuitcase() && passenger.getSuitcase().getHasIlligalThings())
+                        ejectPassenger(passenger);
+                }
+            }
+        }catch (Exception ex)
+        {
+            //Thread.interrupted();
+           // ex.printStackTrace();
+        }
 
         printInfo("Završena obrada vozila: " + vehicle.getVehicleName());
 

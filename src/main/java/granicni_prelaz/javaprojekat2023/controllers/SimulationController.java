@@ -113,7 +113,7 @@ public class SimulationController  implements Initializable {
         try {
            // watcher.start();
             setSimulationController();
-            LoadColumnOfVehiclesView();
+
         } catch (FileLoadingException exception) {
             SimulationLogger.log(this.getClass(), Level.SEVERE, exception.getMessage(), exception);
             System.exit(1);
@@ -132,7 +132,7 @@ public class SimulationController  implements Initializable {
         lblTime.setText("0s");
         //lblTerminalDescription.setText("");
         initPath();
-        //setListViewOfVehicles();
+        LoadColumnOfVehiclesView();
     }
     public void initPath() {
         List<Field> pathfields;
@@ -223,7 +223,7 @@ public class SimulationController  implements Initializable {
 
 
 
-                stage.setResizable(false);
+                //stage.setResizable(false);
                 stage.centerOnScreen();
                 stage.setScene(scene);
                 stage.show();
@@ -243,10 +243,27 @@ public class SimulationController  implements Initializable {
 
     public void startButtonClicked(ActionEvent actionEvent) {
 
-            for(int i = 0; i<Simulation.columnOfVehicles.size();i++)
-            {
-                Simulation.columnOfVehicles.get(i).start();
+        if (!simulationStarted) {
+            if (simulationFinished) {
+                try {
+                    setSimulationController();
+                } catch (FileLoadingException exception) {
+                    SimulationLogger.log(this.getClass(), Level.SEVERE, exception.getMessage(), exception);
+                }
             }
+            timeCounter = new TimeCounter();
+            simulation.start();
+            timeCounter.start();
+            simulationStarted = true;
+        } else {
+            simulationPaused = !simulationPaused;
+            if (!simulationPaused) {
+                synchronized (Simulation.pathWithTerminals) {
+                    Simulation.pathWithTerminals.notifyAll();
+                }
+
+            }
+        }
 
     }
     public static void placeEmptyOnPosition(Field field) {
@@ -412,4 +429,7 @@ public class SimulationController  implements Initializable {
         }
     }
 
+    public void setTimeLabel(int time) {
+        Platform.runLater(() -> lblTime.setText(time + "s"));
+    }
 }

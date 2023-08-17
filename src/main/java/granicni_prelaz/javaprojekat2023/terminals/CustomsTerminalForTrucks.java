@@ -21,6 +21,7 @@ public class CustomsTerminalForTrucks extends CustomsTerminal {
     @Override
     public void processVehicle()
     {
+        Vehicle vehicle = this.vehicle;
         printInfo("Obrađuje vozilo: " + vehicle.getVehicleName());
         Truck truck = (Truck) vehicle;
         if(truck.hasCustomDocumentation() && truck.getRealWeight() > truck.getCustomsDocumentation().getDeclaredWeight())
@@ -28,6 +29,12 @@ public class CustomsTerminalForTrucks extends CustomsTerminal {
             ejectVehicle();
         }
         printInfo("Završena obrada vozila: " + vehicle.getVehicleName());
+
+        try {
+            vehicle.sleep(2000);
+        } catch (InterruptedException e) {
+           // throw new RuntimeException(e);
+        }
     }
 
     void ejectVehicle() {

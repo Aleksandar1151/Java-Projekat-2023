@@ -1,7 +1,9 @@
 package granicni_prelaz.javaprojekat2023.simulation;
 
 import granicni_prelaz.javaprojekat2023.constants.Constants;
+import granicni_prelaz.javaprojekat2023.controllers.SimulationController;
 import granicni_prelaz.javaprojekat2023.exceptions.MapLoadingException;
+import granicni_prelaz.javaprojekat2023.incident.IncidentUtil;
 import granicni_prelaz.javaprojekat2023.incident.ListOfPunishedPersons;
 import granicni_prelaz.javaprojekat2023.json.PathJsonParser;
 import granicni_prelaz.javaprojekat2023.map.Field;
@@ -20,7 +22,7 @@ import java.lang.invoke.VarHandle;
 import java.util.*;
 import java.util.logging.Level;
 
-public class Simulation {
+public class Simulation extends Thread {
 
     public static final PathOnMap pathWithTerminals = initPath(Constants.PATH_ON_MAP);
     public static Queue<Vehicle> queueVehicles = new LinkedList<>();
@@ -29,6 +31,7 @@ public class Simulation {
     public static List<CustomsTerminal> customsTerminals;
     public static ListOfPunishedPersons policeRecord = new ListOfPunishedPersons();
     public static List<String> customsRecord = new ArrayList<>();
+    public static Integer numberOfVehiclesFinished = 0;
 
     private static PathOnMap initPath(String pathName) {
         PathOnMap pathOnMap = null;
@@ -46,9 +49,74 @@ public class Simulation {
         createVehicles(new Truck());
         createTerminals();
         shuffleQueue();
+    }
 
-        System.out.println("Prvo vozilo:" + queueVehicles.peek().getVehicleName());
+    public void run()
+    {
+        // POKRETANJE KOLONE
+        for(int i = 0; i<Simulation.columnOfVehicles.size();i++)
+        {
+            columnOfVehicles.get(i).start();
+        }
 
+        while (SimulationController.simulationStarted && !SimulationController.simulationFinished) {
+
+
+            if (numberOfVehiclesFinished.equals(Constants.NUMBER_OF_VEHICLES)) {
+                SimulationController.simulationFinished = true;
+            } else {
+                synchronized (pathWithTerminals) {
+                    if (SimulationController.simulationPaused) {
+                        try {
+                            pathWithTerminals.wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    refreshMap();
+                    refreshDescription();
+                }
+                // Thread.sleep(Constants.WAITING_TIME);
+            }
+        }
+
+
+        finishGame();
+
+    }
+
+    private void finishGame() {
+
+        System.out.println("Simulacija Gotova");
+
+        SimulationController.simulationStarted = false;
+        SimulationController.simulationPaused = false;
+        SimulationController.simulationFinished = true;
+
+        IncidentUtil.writeListOfPunishedPersonsIntoFile(policeRecord);
+        IncidentUtil.writeCustomsIncident();
+
+        customsRecord.clear();
+        policeRecord.getPersons().clear();
+
+        //resetTerminalsState();
+        refreshMap();
+        refreshDescription();
+
+        SimulationController.timeCounter = null;
+
+        for (Vehicle v : columnOfVehicles) {
+            v = null;
+        }
+
+    }
+
+    private void refreshDescription() {
+        
+    }
+
+    private void refreshMap() {
+        
     }
 
     private void createTerminals() {

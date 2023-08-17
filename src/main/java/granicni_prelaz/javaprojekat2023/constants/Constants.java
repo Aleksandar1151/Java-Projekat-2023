@@ -12,7 +12,7 @@ public abstract class Constants {
     public static final int NUUMBER_OF_BUSES = 5;
     public static final int NUMBER_OF_TRUCKS = 10;
 
-    public static final int SPEED_OF_VEHICLES = 2000;
+    public static final int SPEED_OF_VEHICLES = 1000;
 
     public static final String FAJL_TERMINALI = "";
     public static final String FAJL_EVIDENCIJA_NEPRELSAKA = "";
@@ -42,4 +42,8 @@ public abstract class Constants {
     public static final  int NUMBER_OF_TERMINALS = 5;
     public static final int START_INDEX = 5;
     public static final String COLUMN_OF_VEHICLES_VIEW = "columnOfVehiclesView.fxml";
+    public static final String DATE_TIME_FORMAT = "dd.MM.yy_hh_mm_ss";
+    public static final String RESULTS_DIRECTORY = "." + File.separator + "Records" + File.separator;
+    public static final String LIST_OF_PUNISHED_PERSONS_DIRECTORY = RESULTS_DIRECTORY + "PoliceRecords" + File.separator;
+    public static final String LIST_OF_PUNISHED_VEHICLES_DIRECTORY = RESULTS_DIRECTORY + "CustomsRecords" + File.separator;
 }

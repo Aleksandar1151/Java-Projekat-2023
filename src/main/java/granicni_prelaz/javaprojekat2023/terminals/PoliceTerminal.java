@@ -28,24 +28,23 @@ public class PoliceTerminal extends Terminal {
     @Override
     public void processVehicle() throws InterruptedException {
 
+        Vehicle vehicle = this.vehicle;
         printInfo("Obrađuje vozilo: " + vehicle.getVehicleName());
 
 
         if (vehicle instanceof Bus)
-            Thread.sleep(3000);
+            Thread.sleep(100);
         else
-            Thread.sleep(2000);
+            Thread.sleep(500);
 
         IdentificationDocument identificationDocument = vehicle.getDriver().getIdentificationDocument();
 
         if (!identificationDocument.isValid())
             ejectVehicle();
         else {
-            System.out.println("Passengers in bus: "+vehicle.getPassengers().size());
 
             for (Passenger passenger : new ArrayList<>(vehicle.getPassengers()) ) {
                 identificationDocument = passenger.getIdentificationDocument();
-                System.out.println("Passenger document: "+identificationDocument.isValid());
                 if (!identificationDocument.isValid())
                     ejectPassenger(passenger);
             }

@@ -1,5 +1,8 @@
 package granicni_prelaz.javaprojekat2023.controllers;
 
+import granicni_prelaz.javaprojekat2023.incident.IncidentUtil;
+import granicni_prelaz.javaprojekat2023.incident.ListOfPunishedPersons;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
@@ -39,8 +42,7 @@ public class PoliceRecordViewController {
         _listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                System.out.println(_listView.getSelectionModel().getSelectedItem());
-
+                _textArea.setText("");
 
 
 
@@ -49,16 +51,10 @@ public class PoliceRecordViewController {
                 Path filePath = Paths.get("Records" + File.separator + "PoliceRecords"+ File.separator  + _listView.getSelectionModel().getSelectedItem());
                 Charset charset = StandardCharsets.UTF_8;
 
-                try (BufferedReader bufferedReader = Files.newBufferedReader(filePath, charset)) {
-                    String line;
+                ListOfPunishedPersons punishedPersons = IncidentUtil.readListOfPunishedPersonsFromFile(_listView.getSelectionModel().getSelectedItem());
 
-                    while ((line = bufferedReader.readLine()) != null) {
-                        _textArea.appendText(line + "\n");
-                        System.out.println(line);
-                    }
-                } catch (IOException ex) {
-                    //LoggerClass.log(this.getClass(), Level.SEVERE, ex.getMessage(), ex);
-                }
+                if (punishedPersons != null)
+                    Platform.runLater(() -> _textArea.setText(punishedPersons.toString()));
 
 
 

@@ -45,7 +45,8 @@ public class CustomsRecordViewController {
         _listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                System.out.println(_listView.getSelectionModel().getSelectedItem());
+
+                _textArea.setText("");
 
 
 

@@ -3,9 +3,10 @@ package granicni_prelaz.javaprojekat2023.persons;
 import granicni_prelaz.javaprojekat2023.gadgets.IdentificationDocument;
 import granicni_prelaz.javaprojekat2023.gadgets.Suitcase;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public abstract class Person {
+public abstract class Person implements Serializable {
 
     static int ID_Counter = 1;
     int id;
@@ -39,6 +40,10 @@ public abstract class Person {
     public boolean hasSuitcase()
     {
         return suitcase != null;
+    }
+
+    public String getVehicleName() {
+        return vehicleName;
     }
 
     public String toString()

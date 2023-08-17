@@ -1,0 +1,10 @@
+P196 Dokument je validan.Kofer  ima nedozvoljene stvari.
+P200 Dokument je validan.Kofer  ima nedozvoljene stvari.
+V[K 1] je izbacen jer nema ispravnu carinsku dokumentaciju.
+P206 Dokument je validan.
+P171 Dokument je validan.Kofer  ima nedozvoljene stvari.
+P173 Dokument je validan.Kofer  ima nedozvoljene stvari.
+P174 Dokument je validan.Kofer  ima nedozvoljene stvari.
+P133 Dokument je validan.Kofer  ima nedozvoljene stvari.
+P144 Dokument je validan.Kofer  ima nedozvoljene stvari.
+P147 Dokument je validan.Kofer  ima nedozvoljene stvari.

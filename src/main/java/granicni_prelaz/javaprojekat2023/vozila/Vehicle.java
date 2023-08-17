@@ -18,31 +18,31 @@ import java.util.List;
 import java.util.Random;
 
 
-
-public abstract class Vehicle extends Thread{
+public abstract class Vehicle extends Thread {
     Driver driver;
     List<Passenger> passengers = new ArrayList<>();
     String vehicleName;
     boolean isEjected;
 
     int position;
-
-    Vehicle(String vehicleName, int maxPassengers)
-    {
+    List<Field> pathfields;
+    Vehicle(String vehicleName, int maxPassengers) {
         this.vehicleName = vehicleName;
         driver = new Driver(vehicleName);
 
         Random rnd = new Random();
         int numOfPassengers = rnd.nextInt(maxPassengers);
-        for(int i = 0; i<numOfPassengers;i++)
-        {
+        for (int i = 0; i < numOfPassengers; i++) {
             passengers.add(new Passenger(vehicleName));
         }
+
+
     }
+
     Field field;
-    public void run()
-    {
-        List<Field> pathfields = Simulation.pathWithTerminals.getPathFields();
+
+    public void run() {
+        pathfields = Simulation.pathWithTerminals.getPathFields();
         PoliceTerminal policeTerminal = Simulation.policeTerminals.get(0);
         CustomsTerminal customsTerminal = Simulation.customsTerminals.get(0);
 
@@ -50,36 +50,42 @@ public abstract class Vehicle extends Thread{
         boolean finishedCustomsTerminal = false;
 
         //KRETANJE U KOLONI
-        while(true)
-        {
-            if(position < Constants.NUMBER_OF_ELEMENTS_AT_FIRST_MAP)
-            {
-                if(position == Constants.START_INDEX) break;
+        while (true) {
+
+            synchronized (Simulation.pathWithTerminals) {
+                if (SimulationController.simulationPaused) {
+                    try {
+                        Simulation.pathWithTerminals.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            if (position < Constants.NUMBER_OF_ELEMENTS_AT_FIRST_MAP) {
+                if (position == Constants.START_INDEX) break;
 
 
-                if(!pathfields.get(position-1).isHasVehicle())
-                {
-                    Simulation.pathWithTerminals.setVehicleOnPosition(this,position-1);
+                if (!pathfields.get(position - 1).isHasVehicle()) {
+                    Simulation.pathWithTerminals.setVehicleOnPosition(this, position - 1);
                     SimulationController.placeEmptyOnPosition(pathfields.get(position));
 
-                    SimulationController.placeVehicleOnPosition(this,pathfields.get(position-1));
+                    SimulationController.placeVehicleOnPosition(this, pathfields.get(position - 1));
 
                     position--;
                 }
 
 
-            }else {
+            } else {
 
-                if(!pathfields.get(position-1).isHasVehicle())
-                {
-                    Simulation.pathWithTerminals.setVehicleOnPosition(this,position-1);
+                if (!pathfields.get(position - 1).isHasVehicle()) {
+                    Simulation.pathWithTerminals.setVehicleOnPosition(this, position - 1);
                     ColumnOfVehiclesController.placeEmptyOnPosition(pathfields.get(position));
 
-                    if(position == Constants.NUMBER_OF_ELEMENTS_AT_FIRST_MAP)
-                        SimulationController.placeVehicleOnPosition(this,pathfields.get(position-1));
+                    if (position == Constants.NUMBER_OF_ELEMENTS_AT_FIRST_MAP)
+                        SimulationController.placeVehicleOnPosition(this, pathfields.get(position - 1));
                     else
-                        ColumnOfVehiclesController.placeVehicleOnPosition(this,pathfields.get(position-1));
-
+                        ColumnOfVehiclesController.placeVehicleOnPosition(this, pathfields.get(position - 1));
 
 
                     position--;
@@ -94,22 +100,29 @@ public abstract class Vehicle extends Thread{
         }
         pathfields.get(position).setVehicle(null);
 
+        try {
+            Thread.sleep(Constants.SPEED_OF_VEHICLES);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         //ULAZAK U POLICIJSKI TERMINAL
-        while(!finishedPoliceTerminal)
-        {
+        while (!finishedPoliceTerminal) {
 
-            if(this == Simulation.queueVehicles.peek())
-            {
+            if (this == Simulation.queueVehicles.peek()) {
 
 
-                for (PoliceTerminal pt: Simulation.policeTerminals ) {
+                for (PoliceTerminal pt : Simulation.policeTerminals) {
 
 
-                    if(!pt.hasVehicle() && pt.acceptVehicle(this) && pt.isInFunction())
-                    {
+                    if (!pt.hasVehicle() && pt.acceptVehicle(this) && pt.isInFunction()) {
                         Field field = pathfields.get(pt.getPosition());
-                        SimulationController.placeVehicleOnPosition(this,field);
-                        SimulationController.placeEmptyOnPosition(pathfields.get(position));
+
+                        synchronized (Simulation.pathWithTerminals) {
+                            SimulationController.placeVehicleOnPosition(this, field);
+                            SimulationController.placeEmptyOnPosition(pathfields.get(position));
+                        }
+
                         position = pt.getPosition();
                         Simulation.queueVehicles.remove();
 
@@ -122,7 +135,7 @@ public abstract class Vehicle extends Thread{
                             //pt.setBusy(true);
                             pt.processVehicle();
                             //pt.setBusy(false);
-                           // pt.setVehicle(null);
+                            // pt.setVehicle(null);
                         } catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }
@@ -138,21 +151,29 @@ public abstract class Vehicle extends Thread{
 
         }
 
-        if(isEjected) interrupt();
 
-        while(!finishedCustomsTerminal)
-        {
-            for (CustomsTerminal ct: Simulation.customsTerminals ) {
+        try {
+            if (isEjected)
+            {
+                Thread.currentThread().interrupt();
+            }
+            Thread.sleep(Constants.SPEED_OF_VEHICLES);
+        } catch (InterruptedException e) {
+            //throw new RuntimeException(e);
+        }
 
-                if(!ct.hasVehicle() && ct.acceptVehicle(this) && ct.isInFunction())
-                {
+        while (!finishedCustomsTerminal) {
+            for (CustomsTerminal ct : Simulation.customsTerminals) {
+
+                if (!ct.hasVehicle() && ct.acceptVehicle(this) && ct.isInFunction()) {
                     policeTerminal.setVehicle(null);
 
-                    SimulationController.placeVehicleOnPosition(this,pathfields.get(ct.getPosition()));
-                    SimulationController.placeTerminalOnPosition(policeTerminal,pathfields.get(policeTerminal.getPosition()));
+                    synchronized (Simulation.pathWithTerminals) {
+                        SimulationController.placeVehicleOnPosition(this, pathfields.get(ct.getPosition()));
+                        SimulationController.placeTerminalOnPosition(policeTerminal, pathfields.get(policeTerminal.getPosition()));
+                    }
                     position = ct.getPosition();
                     customsTerminal = ct;
-
 
 
                     try {
@@ -166,8 +187,7 @@ public abstract class Vehicle extends Thread{
                     finishedCustomsTerminal = true;
                     break;
 
-                }
-                else {
+                } else {
                     //System.out.println(this.getVehicleName() + " čeka...");
                 }
 
@@ -176,16 +196,19 @@ public abstract class Vehicle extends Thread{
 
         }
 
-        SimulationController.placeTerminalOnPosition(customsTerminal,pathfields.get(customsTerminal.getPosition()));
-        System.out.println(getVehicleName() + " je prosao granicu.");
+        try {
+            Thread.sleep(Constants.SPEED_OF_VEHICLES);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
+        SimulationController.placeTerminalOnPosition(customsTerminal, pathfields.get(customsTerminal.getPosition()));
 
-
-
-
-
+        Simulation.numberOfVehiclesFinished++;
 
     }
+
+
 
     public String getVehicleName() {
         return vehicleName;
@@ -215,15 +238,14 @@ public abstract class Vehicle extends Thread{
         return position;
     }
 
-    public String  toString()
-    {
+    public String toString() {
         String string = vehicleName + "\n";
-        string +="Vozac["+ getDriver()+"]\n";
+        string += "Vozac[" + getDriver() + "]\n";
         string += "Putnici:\n";
-        for (Passenger passenger: passengers  ) {
+        for (Passenger passenger : passengers) {
             string += passenger + "\n";
         }
 
-        return string ;
+        return string;
     }
 }
