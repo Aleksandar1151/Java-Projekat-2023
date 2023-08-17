@@ -94,18 +94,19 @@ public abstract class Vehicle extends Thread{
 
         while(!finishedPoliceTerminal)
         {
-            System.out.println("1");
+
             if(this == Simulation.queueVehicles.peek())
             {
 
-                System.out.println("2");
+
                 for (PoliceTerminal pt: Simulation.policeTerminals ) {
-                    System.out.println("3");
+
 
                     if(!pt.isBusy() && pt.acceptVehicle(this) && pt.isInFunction())
                     {
+                        SimulationController.placeEmptyOnPosition(pathfields.get(position));
                         Simulation.queueVehicles.remove();
-                        System.out.println("4");
+
                         policeTerminal = pt;
                         pt.setVehicle(this);
                         try {

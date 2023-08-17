@@ -6,6 +6,8 @@ import granicni_prelaz.javaprojekat2023.vozila.Car;
 import granicni_prelaz.javaprojekat2023.vozila.Truck;
 import granicni_prelaz.javaprojekat2023.vozila.Vehicle;
 
+import java.util.ArrayList;
+
 public class CustomsTerminal extends Terminal{
 
 
@@ -18,7 +20,7 @@ public class CustomsTerminal extends Terminal{
 
         if(vehicle instanceof Car) Thread.sleep(2000);
         else {
-            for (Passenger passenger: vehicle.getPassengers() ) {
+            for (Passenger passenger : new ArrayList<>(vehicle.getPassengers())) {
                 if(passenger.getSuitcase().getHasIlligalThings())
                     ejectPassenger(passenger);
             }

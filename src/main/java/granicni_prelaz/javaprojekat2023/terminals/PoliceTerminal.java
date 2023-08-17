@@ -12,6 +12,8 @@ import granicni_prelaz.javaprojekat2023.vozila.Truck;
 import granicni_prelaz.javaprojekat2023.vozila.Vehicle;
 import javafx.scene.control.Label;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class PoliceTerminal extends Terminal {
@@ -37,12 +39,17 @@ public class PoliceTerminal extends Terminal {
         if (!identificationDocument.isValid())
             ejectVehicle();
         else {
-            System.out.println(vehicle.getPassengers().size());
-            for (Passenger passenger : vehicle.getPassengers()) {
+            System.out.println("Passengers in bus: "+vehicle.getPassengers().size());
+
+
+            for (Passenger passenger : new ArrayList<>(vehicle.getPassengers()) ) {
                 identificationDocument = passenger.getIdentificationDocument();
+                System.out.println("Passenger document: "+identificationDocument.isValid());
                 if (!identificationDocument.isValid())
                     ejectPassenger(passenger);
             }
+
+
         }
 
 

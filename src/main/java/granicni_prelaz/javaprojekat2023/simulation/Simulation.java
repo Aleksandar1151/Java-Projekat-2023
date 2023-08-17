@@ -69,16 +69,16 @@ public class Simulation {
 
         if (vehicleType instanceof Car)
             for (int i = 0; i < Constants.NUMBER_OF_CARS; i++)
-                queueVehicles.add(new Truck());
+                queueVehicles.add(new Bus());
 
 
         if (vehicleType instanceof Bus)
             for (int i = 0; i < Constants.NUUMBER_OF_BUSES; i++)
-                queueVehicles.add(new Truck());
+                queueVehicles.add(new Bus());
 
         if (vehicleType instanceof Truck)
             for (int i = 0; i < Constants.NUMBER_OF_TRUCKS; i++)
-                queueVehicles.add(new Truck());
+                queueVehicles.add(new Bus());
 
     }
 
