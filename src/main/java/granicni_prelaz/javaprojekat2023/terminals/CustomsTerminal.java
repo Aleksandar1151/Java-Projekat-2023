@@ -4,9 +4,9 @@ import granicni_prelaz.javaprojekat2023.constants.Constants;
 import granicni_prelaz.javaprojekat2023.controllers.SimulationController;
 import granicni_prelaz.javaprojekat2023.persons.Passenger;
 import granicni_prelaz.javaprojekat2023.simulation.Simulation;
-import granicni_prelaz.javaprojekat2023.vozila.Car;
-import granicni_prelaz.javaprojekat2023.vozila.Truck;
-import granicni_prelaz.javaprojekat2023.vozila.Vehicle;
+import granicni_prelaz.javaprojekat2023.vehicles.Car;
+import granicni_prelaz.javaprojekat2023.vehicles.Truck;
+import granicni_prelaz.javaprojekat2023.vehicles.Vehicle;
 
 import java.util.ArrayList;
 
@@ -25,17 +25,17 @@ public class CustomsTerminal extends Terminal{
 
         try
         {
-            if(vehicle instanceof Car) Thread.sleep(Constants.CUSTOMS_TERMINAL_WAIT);
+            if(vehicle instanceof Car)
+            {
+                Thread.sleep(Constants.CUSTOMS_TERMINAL_WAIT);
+            }
             else {
                 for (Passenger passenger : new ArrayList<>(vehicle.getPassengers())) {
                     if(passenger.hasSuitcase() && passenger.getSuitcase().getHasIlligalThings())
                         ejectPassenger(passenger);
                 }
             }
-        }catch (Exception ex)
-        {
-            //Thread.interrupted();
-           // ex.printStackTrace();
+        }catch (Exception ex)        {
         }
 
         printInfo("Završena obrada vozila: " + vehicle.getVehicleName());

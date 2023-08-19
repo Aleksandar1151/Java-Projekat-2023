@@ -1,20 +1,14 @@
 package granicni_prelaz.javaprojekat2023.terminals;
 
-import granicni_prelaz.javaprojekat2023.constants.Constants;
 import granicni_prelaz.javaprojekat2023.controllers.SimulationController;
 import granicni_prelaz.javaprojekat2023.gadgets.IdentificationDocument;
-import granicni_prelaz.javaprojekat2023.map.Field;
 import granicni_prelaz.javaprojekat2023.persons.Passenger;
 import granicni_prelaz.javaprojekat2023.simulation.Simulation;
-import granicni_prelaz.javaprojekat2023.util.Utils;
-import granicni_prelaz.javaprojekat2023.vozila.Bus;
-import granicni_prelaz.javaprojekat2023.vozila.Truck;
-import granicni_prelaz.javaprojekat2023.vozila.Vehicle;
-import javafx.scene.control.Label;
+import granicni_prelaz.javaprojekat2023.vehicles.Bus;
+import granicni_prelaz.javaprojekat2023.vehicles.Truck;
+import granicni_prelaz.javaprojekat2023.vehicles.Vehicle;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public class PoliceTerminal extends Terminal {
 
@@ -30,6 +24,7 @@ public class PoliceTerminal extends Terminal {
 
         Vehicle vehicle = this.vehicle;
         printInfo("Obrađuje vozilo: " + vehicle.getVehicleName());
+
 
 
         if (vehicle instanceof Bus)

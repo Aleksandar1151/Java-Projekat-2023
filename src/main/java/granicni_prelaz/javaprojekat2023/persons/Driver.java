@@ -10,7 +10,7 @@ public class Driver extends Person {
 
     public String toString()
     {
-        return "V[" + vehicleName +"]";
+        return "-- V [" + vehicleName +"] " + super.toString();
     }
 
 }

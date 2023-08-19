@@ -1,8 +1,9 @@
 package granicni_prelaz.javaprojekat2023.gadgets;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Suitcase {
+public class Suitcase implements Serializable {
 
     int personID;
     boolean hasIlligalThings;

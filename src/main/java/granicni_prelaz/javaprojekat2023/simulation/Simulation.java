@@ -1,31 +1,35 @@
 package granicni_prelaz.javaprojekat2023.simulation;
 
+import granicni_prelaz.javaprojekat2023.HelloApplication;
 import granicni_prelaz.javaprojekat2023.constants.Constants;
 import granicni_prelaz.javaprojekat2023.controllers.SimulationController;
+import granicni_prelaz.javaprojekat2023.exceptions.FileLoadingException;
 import granicni_prelaz.javaprojekat2023.exceptions.MapLoadingException;
 import granicni_prelaz.javaprojekat2023.incident.IncidentUtil;
 import granicni_prelaz.javaprojekat2023.incident.ListOfPunishedPersons;
 import granicni_prelaz.javaprojekat2023.json.PathJsonParser;
 import granicni_prelaz.javaprojekat2023.map.Field;
 import granicni_prelaz.javaprojekat2023.map.PathOnMap;
+import granicni_prelaz.javaprojekat2023.persons.Person;
 import granicni_prelaz.javaprojekat2023.terminals.CustomsTerminal;
 import granicni_prelaz.javaprojekat2023.terminals.CustomsTerminalForTrucks;
 import granicni_prelaz.javaprojekat2023.terminals.PoliceTerminal;
 import granicni_prelaz.javaprojekat2023.terminals.PoliceTerminalForTrucks;
 import granicni_prelaz.javaprojekat2023.util.SimulationLogger;
-import granicni_prelaz.javaprojekat2023.vozila.Bus;
-import granicni_prelaz.javaprojekat2023.vozila.Car;
-import granicni_prelaz.javaprojekat2023.vozila.Truck;
-import granicni_prelaz.javaprojekat2023.vozila.Vehicle;
+import granicni_prelaz.javaprojekat2023.util.TerminalWatcher;
+import granicni_prelaz.javaprojekat2023.vehicles.Bus;
+import granicni_prelaz.javaprojekat2023.vehicles.Car;
+import granicni_prelaz.javaprojekat2023.vehicles.Truck;
+import granicni_prelaz.javaprojekat2023.vehicles.Vehicle;
+import javafx.application.Platform;
 
-import java.lang.invoke.VarHandle;
 import java.util.*;
 import java.util.logging.Level;
 
 public class Simulation extends Thread {
 
     public static final PathOnMap pathWithTerminals = initPath(Constants.PATH_ON_MAP);
-    public static Queue<Vehicle> queueVehicles = new LinkedList<>();
+    public static Queue<Vehicle> queueVehicles ;
     public static List<Vehicle> columnOfVehicles;
     public static List<PoliceTerminal> policeTerminals;
     public static List<CustomsTerminal> customsTerminals;
@@ -44,6 +48,16 @@ public class Simulation extends Thread {
     }
 
     public Simulation() {
+
+        columnOfVehicles = new ArrayList<>();
+        queueVehicles = new LinkedList<>();
+
+        Car.ID_Counter = 0;
+        Bus.ID_Counter = 0;
+        Truck.ID_Counter = 0;
+        Person.ID_Counter = 0;
+
+
         createVehicles(new Car());
         createVehicles(new Bus());
         createVehicles(new Truck());
@@ -70,13 +84,13 @@ public class Simulation extends Thread {
                         try {
                             pathWithTerminals.wait();
                         } catch (InterruptedException e) {
-                            e.printStackTrace();
+                            SimulationLogger.log(TerminalWatcher.class, Level.SEVERE, e.getMessage(), e);
                         }
                     }
-                    refreshMap();
-                    refreshDescription();
+                  //  refreshMap();
+                    //refreshDescription();
                 }
-                // Thread.sleep(Constants.WAITING_TIME);
+
             }
         }
 
@@ -99,15 +113,18 @@ public class Simulation extends Thread {
         customsRecord.clear();
         policeRecord.getPersons().clear();
 
-        //resetTerminalsState();
-        refreshMap();
-        refreshDescription();
-
-        SimulationController.timeCounter = null;
-
         for (Vehicle v : columnOfVehicles) {
             v = null;
         }
+
+
+        //resetTerminalsState();
+        //refreshMap();
+       // refreshDescription();
+
+        //SimulationController.timeCounter = null;
+
+
 
     }
 
@@ -116,7 +133,18 @@ public class Simulation extends Thread {
     }
 
     private void refreshMap() {
-        
+        Platform.runLater(() -> {
+                    //HelloApplication.simulationController.initPath();
+                    if (SimulationController.columnOfVehiclesController != null)
+                        SimulationController.columnOfVehiclesController.initPath();
+
+                    try {
+                        HelloApplication.simulationController.setSimulationController();
+                    } catch (FileLoadingException e) {
+                        SimulationLogger.log(TerminalWatcher.class, Level.SEVERE, e.getMessage(), e);
+                    }
+                }
+        );
     }
 
     private void createTerminals() {

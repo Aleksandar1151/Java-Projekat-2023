@@ -1,7 +1,6 @@
 package granicni_prelaz.javaprojekat2023.map;
 
-import granicni_prelaz.javaprojekat2023.map.Field;
-import granicni_prelaz.javaprojekat2023.vozila.Vehicle;
+import granicni_prelaz.javaprojekat2023.vehicles.Vehicle;
 
 import java.util.ArrayList;
 import java.util.List;

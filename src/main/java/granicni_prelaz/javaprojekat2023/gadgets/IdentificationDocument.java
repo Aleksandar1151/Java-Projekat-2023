@@ -1,8 +1,9 @@
 package granicni_prelaz.javaprojekat2023.gadgets;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class IdentificationDocument {
+public class IdentificationDocument  implements Serializable {
 
     int personID;
     boolean isValid;

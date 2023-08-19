@@ -2,8 +2,8 @@ package granicni_prelaz.javaprojekat2023.terminals;
 
 import granicni_prelaz.javaprojekat2023.persons.Passenger;
 import granicni_prelaz.javaprojekat2023.simulation.Simulation;
-import granicni_prelaz.javaprojekat2023.vozila.Truck;
-import granicni_prelaz.javaprojekat2023.vozila.Vehicle;
+import granicni_prelaz.javaprojekat2023.vehicles.Truck;
+import granicni_prelaz.javaprojekat2023.vehicles.Vehicle;
 
 import java.util.ArrayList;
 

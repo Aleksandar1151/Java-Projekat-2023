@@ -1,6 +1,6 @@
 package granicni_prelaz.javaprojekat2023.controllers;
 
-import granicni_prelaz.javaprojekat2023.vozila.Vehicle;
+import granicni_prelaz.javaprojekat2023.vehicles.Vehicle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;

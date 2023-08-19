@@ -10,13 +10,12 @@ import granicni_prelaz.javaprojekat2023.util.SimulationLogger;
 import granicni_prelaz.javaprojekat2023.util.TerminalWatcher;
 import granicni_prelaz.javaprojekat2023.util.TimeCounter;
 import granicni_prelaz.javaprojekat2023.util.Utils;
-import granicni_prelaz.javaprojekat2023.vozila.Bus;
-import granicni_prelaz.javaprojekat2023.vozila.Car;
-import granicni_prelaz.javaprojekat2023.vozila.Truck;
-import granicni_prelaz.javaprojekat2023.vozila.Vehicle;
+import granicni_prelaz.javaprojekat2023.vehicles.Bus;
+import granicni_prelaz.javaprojekat2023.vehicles.Car;
+import granicni_prelaz.javaprojekat2023.vehicles.Truck;
+import granicni_prelaz.javaprojekat2023.vehicles.Vehicle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,7 +23,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -36,16 +34,14 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
-import java.util.zip.GZIPInputStream;
 import java.awt.Desktop;
 
 public class SimulationController  implements Initializable {
-    private Simulation simulation;
+    public static Simulation simulation;
     public static ColumnOfVehiclesController columnOfVehiclesController;
-    private final TerminalWatcher watcher = new TerminalWatcher();
+    private static TerminalWatcher watcher;
 
     public static boolean simulationStarted;
     public static boolean simulationPaused;
@@ -111,28 +107,32 @@ public class SimulationController  implements Initializable {
 
 
         try {
-           // watcher.start();
+
             setSimulationController();
+
 
         } catch (FileLoadingException exception) {
             SimulationLogger.log(this.getClass(), Level.SEVERE, exception.getMessage(), exception);
             System.exit(1);
         }
 
-        setListViewOfVehicles();
+
     }
 
 
-    private void setSimulationController() throws FileLoadingException {
+    public void setSimulationController() throws FileLoadingException {
         simulationStarted = false;
         simulationFinished = false;
         simulationPaused = false;
 
         simulation = new Simulation();
-        lblTime.setText("0s");
+        watcher = new TerminalWatcher();
+        //lblTime.setText("0s");
         //lblTerminalDescription.setText("");
         initPath();
         LoadColumnOfVehiclesView();
+        setListViewOfVehicles();
+        watcher.start();
     }
     public void initPath() {
         List<Field> pathfields;

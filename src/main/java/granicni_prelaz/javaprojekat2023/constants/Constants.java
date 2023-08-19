@@ -48,4 +48,6 @@ public abstract class Constants {
     public static final String RESULTS_DIRECTORY = "." + File.separator + "Records" + File.separator;
     public static final String LIST_OF_PUNISHED_PERSONS_DIRECTORY = RESULTS_DIRECTORY + "PoliceRecords" + File.separator;
     public static final String LIST_OF_PUNISHED_VEHICLES_DIRECTORY = RESULTS_DIRECTORY + "CustomsRecords" + File.separator;
+
+    public static final String TERMINALS_DIRECTORY = "." + File.separator + "Terminals" + File.separator ;
 }

@@ -8,7 +8,7 @@ import java.util.Random;
 
 public abstract class Person implements Serializable {
 
-    static int ID_Counter = 1;
+    public static int ID_Counter = 1;
     int id;
     Suitcase suitcase;
     IdentificationDocument identificationDocument;

@@ -1,4 +1,4 @@
-package granicni_prelaz.javaprojekat2023.vozila;
+package granicni_prelaz.javaprojekat2023.vehicles;
 
 import granicni_prelaz.javaprojekat2023.constants.Constants;
 import granicni_prelaz.javaprojekat2023.gadgets.CustomsDocumentation;
@@ -6,7 +6,7 @@ import granicni_prelaz.javaprojekat2023.gadgets.CustomsDocumentation;
 import java.util.Random;
 
 public class Truck extends Vehicle{
-    static int ID_Counter = 0;
+    public static int ID_Counter = 0;
     int id;
     CustomsDocumentation customsDocumentation;
     double realWeight;

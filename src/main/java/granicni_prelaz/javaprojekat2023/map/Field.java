@@ -1,7 +1,6 @@
 package granicni_prelaz.javaprojekat2023.map;
 
-import granicni_prelaz.javaprojekat2023.terminals.Terminal;
-import granicni_prelaz.javaprojekat2023.vozila.Vehicle;
+import granicni_prelaz.javaprojekat2023.vehicles.Vehicle;
 
 public class Field {
     private final int xPosition;
@@ -29,7 +28,7 @@ public class Field {
     }
 
 
-    public boolean isHasVehicle() {
+    public synchronized  boolean isHasVehicle() {
         return hasVehicle;
     }
 

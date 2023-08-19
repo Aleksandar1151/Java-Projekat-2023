@@ -1,7 +1,7 @@
 package granicni_prelaz.javaprojekat2023.terminals;
 
 import granicni_prelaz.javaprojekat2023.persons.Passenger;
-import granicni_prelaz.javaprojekat2023.vozila.Vehicle;
+import granicni_prelaz.javaprojekat2023.vehicles.Vehicle;
 
 public abstract class Terminal {
 
