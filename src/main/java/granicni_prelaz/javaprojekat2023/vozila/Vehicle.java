@@ -100,11 +100,14 @@ public abstract class Vehicle extends Thread {
         }
         pathfields.get(position).setVehicle(null);
 
+
+        //
+/*
         try {
             Thread.sleep(Constants.SPEED_OF_VEHICLES);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
-        }
+        }*/
 
         //ULAZAK U POLICIJSKI TERMINAL
         while (!finishedPoliceTerminal) {
@@ -116,6 +119,9 @@ public abstract class Vehicle extends Thread {
 
 
                     if (!pt.hasVehicle() && pt.acceptVehicle(this) && pt.isInFunction()) {
+
+
+
                         Field field = pathfields.get(pt.getPosition());
 
                         synchronized (Simulation.pathWithTerminals) {
@@ -131,8 +137,6 @@ public abstract class Vehicle extends Thread {
                         try {
                             pt.setVehicle(this);
 
-                            System.out.println("Driver: " + driver);
-                            //pt.setBusy(true);
                             pt.processVehicle();
                             //pt.setBusy(false);
                             // pt.setVehicle(null);
@@ -152,20 +156,22 @@ public abstract class Vehicle extends Thread {
         }
 
 
+        if (isEjected)
+        {
+            Thread.currentThread().interrupt();
+        }
+        /*
         try {
-            if (isEjected)
-            {
-                Thread.currentThread().interrupt();
-            }
             Thread.sleep(Constants.SPEED_OF_VEHICLES);
         } catch (InterruptedException e) {
-            //throw new RuntimeException(e);
-        }
+           // throw new RuntimeException(e);
+        }*/
 
         while (!finishedCustomsTerminal) {
             for (CustomsTerminal ct : Simulation.customsTerminals) {
 
                 if (!ct.hasVehicle() && ct.acceptVehicle(this) && ct.isInFunction()) {
+
                     policeTerminal.setVehicle(null);
 
                     synchronized (Simulation.pathWithTerminals) {
@@ -175,6 +181,12 @@ public abstract class Vehicle extends Thread {
                     position = ct.getPosition();
                     customsTerminal = ct;
 
+                    try {
+                        Thread.sleep(Constants.SPEED_OF_VEHICLES/2);
+                    } catch (InterruptedException e) {
+                        // throw new RuntimeException(e);
+                    }
+
 
                     try {
                         ct.setVehicle(this);
@@ -183,6 +195,8 @@ public abstract class Vehicle extends Thread {
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
+
+
 
                     finishedCustomsTerminal = true;
                     break;

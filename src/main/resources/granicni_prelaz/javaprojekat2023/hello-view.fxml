@@ -96,7 +96,7 @@
                 </Label>
             <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="206.0" prefWidth="182.0">
                <children>
-                  <Label fx:id="p1Terminal" prefHeight="18.0" prefWidth="229.0" text="P1 : obrađuje V1" textAlignment="CENTER">
+                  <Label fx:id="p1Terminal" prefHeight="18.0" prefWidth="229.0" text="P1 :" textAlignment="CENTER">
                      <font>
                         <Font name="Arial Italic" size="15.0" />
                      </font>
@@ -107,7 +107,7 @@
                         <Insets bottom="5.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="p2Terminal" prefHeight="18.0" prefWidth="229.0" text="P1 : obrađuje V1" textAlignment="CENTER">
+                  <Label fx:id="p2Terminal" prefHeight="18.0" prefWidth="229.0" text="P2 : " textAlignment="CENTER">
                      <font>
                         <Font name="Arial Italic" size="15.0" />
                      </font>
@@ -118,7 +118,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="pkTerminal" prefHeight="18.0" prefWidth="229.0" text="P1 : obrađuje V1" textAlignment="CENTER">
+                  <Label fx:id="pkTerminal" prefHeight="18.0" prefWidth="229.0" text="PK : " textAlignment="CENTER">
                      <font>
                         <Font name="Arial Italic" size="15.0" />
                      </font>
@@ -129,7 +129,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="cTerminal" prefHeight="18.0" prefWidth="229.0" text="P1 : obrađuje V1" textAlignment="CENTER">
+                  <Label fx:id="cTerminal" prefHeight="18.0" prefWidth="229.0" text="C : " textAlignment="CENTER">
                      <font>
                         <Font name="Arial Italic" size="15.0" />
                      </font>
@@ -140,7 +140,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="ckTerminal" prefHeight="18.0" prefWidth="229.0" text="P1 : obrađuje V1" textAlignment="CENTER">
+                  <Label fx:id="ckTerminal" prefHeight="18.0" prefWidth="229.0" text="CK : " textAlignment="CENTER">
                      <font>
                         <Font name="Arial Italic" size="15.0" />
                      </font>

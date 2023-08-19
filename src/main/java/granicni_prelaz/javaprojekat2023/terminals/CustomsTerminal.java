@@ -1,5 +1,6 @@
 package granicni_prelaz.javaprojekat2023.terminals;
 
+import granicni_prelaz.javaprojekat2023.constants.Constants;
 import granicni_prelaz.javaprojekat2023.controllers.SimulationController;
 import granicni_prelaz.javaprojekat2023.persons.Passenger;
 import granicni_prelaz.javaprojekat2023.simulation.Simulation;
@@ -24,7 +25,7 @@ public class CustomsTerminal extends Terminal{
 
         try
         {
-            if(vehicle instanceof Car) Thread.sleep(2000);
+            if(vehicle instanceof Car) Thread.sleep(Constants.CUSTOMS_TERMINAL_WAIT);
             else {
                 for (Passenger passenger : new ArrayList<>(vehicle.getPassengers())) {
                     if(passenger.hasSuitcase() && passenger.getSuitcase().getHasIlligalThings())
