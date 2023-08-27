@@ -2,6 +2,7 @@ package granicni_prelaz.javaprojekat2023.terminals;
 
 import granicni_prelaz.javaprojekat2023.constants.Constants;
 import granicni_prelaz.javaprojekat2023.controllers.SimulationController;
+import granicni_prelaz.javaprojekat2023.incident.IncidentUtil;
 import granicni_prelaz.javaprojekat2023.persons.Passenger;
 import granicni_prelaz.javaprojekat2023.simulation.Simulation;
 import granicni_prelaz.javaprojekat2023.vehicles.Car;
@@ -51,7 +52,8 @@ public class CustomsTerminal extends Terminal{
     void ejectPassenger(Passenger passenger) {
         vehicle.getPassengers().remove(passenger);
         Simulation.customsRecord.add(passenger.toString());
-        System.out.println("Ejected passenger---- " + passenger.toString());
+
+        IncidentUtil.writeCustomsIncidentIntoFile();
 
     }
 

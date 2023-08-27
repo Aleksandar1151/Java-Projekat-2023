@@ -109,7 +109,7 @@ public class Simulation extends Thread {
         SimulationController.simulationPaused = false;
         SimulationController.simulationFinished = true;
 
-        //IncidentUtil.writeListOfPunishedPersonsIntoFile(policeRecord);
+        IncidentUtil.writeListOfPunishedPersonsIntoFile(policeRecord);
         IncidentUtil.writeCustomsIncident();
 
         customsRecord.clear();

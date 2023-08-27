@@ -27,7 +27,7 @@ public class TimeCounter extends  Thread {
             }
             HelloApplication.simulationController.setTimeLabel(time);
             try {
-                Thread.sleep(Constants.SPEED_OF_VEHICLES);
+                Thread.sleep(1000);
             } catch (InterruptedException exception) {
                 SimulationLogger.log(getClass(), Level.SEVERE,exception.getMessage(),exception);
             }

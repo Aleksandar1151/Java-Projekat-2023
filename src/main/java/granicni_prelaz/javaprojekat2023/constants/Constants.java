@@ -12,7 +12,7 @@ public abstract class Constants {
     public static final int NUUMBER_OF_BUSES = 5;
     public static final int NUMBER_OF_TRUCKS = 10;
 
-    public static final int SPEED_OF_VEHICLES = 1000;
+    public static final int SPEED_OF_VEHICLES = 500;
 
     public static final int CUSTOMS_TERMINAL_WAIT = 1000;
 

@@ -1,5 +1,6 @@
 package granicni_prelaz.javaprojekat2023.terminals;
 
+import granicni_prelaz.javaprojekat2023.incident.IncidentUtil;
 import granicni_prelaz.javaprojekat2023.persons.Passenger;
 import granicni_prelaz.javaprojekat2023.simulation.Simulation;
 import granicni_prelaz.javaprojekat2023.vehicles.Truck;
@@ -48,7 +49,7 @@ public class CustomsTerminalForTrucks extends CustomsTerminal {
 
         if(Simulation.queueVehicles.peek() == vehicle)
             Simulation.queueVehicles.remove();
-
+        IncidentUtil.writeCustomsIncidentIntoFile();
     }
 
 }

@@ -6,10 +6,7 @@ import granicni_prelaz.javaprojekat2023.exceptions.FileLoadingException;
 import granicni_prelaz.javaprojekat2023.map.Field;
 import granicni_prelaz.javaprojekat2023.simulation.Simulation;
 import granicni_prelaz.javaprojekat2023.terminals.*;
-import granicni_prelaz.javaprojekat2023.util.SimulationLogger;
-import granicni_prelaz.javaprojekat2023.util.TerminalWatcher;
-import granicni_prelaz.javaprojekat2023.util.TimeCounter;
-import granicni_prelaz.javaprojekat2023.util.Utils;
+import granicni_prelaz.javaprojekat2023.util.*;
 import granicni_prelaz.javaprojekat2023.vehicles.Bus;
 import granicni_prelaz.javaprojekat2023.vehicles.Car;
 import granicni_prelaz.javaprojekat2023.vehicles.Truck;
@@ -42,6 +39,8 @@ public class SimulationController  implements Initializable {
     public static Simulation simulation;
     public static ColumnOfVehiclesController columnOfVehiclesController;
     private static TerminalWatcher watcher;
+    private static PoliceRecordWatcher policeWatcher;
+    private static CustomsRecordWatcher customsWatcher;
 
     public static boolean simulationStarted;
     public static boolean simulationPaused;
@@ -127,12 +126,19 @@ public class SimulationController  implements Initializable {
 
         simulation = new Simulation();
         watcher = new TerminalWatcher();
+        policeWatcher = new PoliceRecordWatcher();
+        customsWatcher = new CustomsRecordWatcher();
         //lblTime.setText("0s");
         //lblTerminalDescription.setText("");
         initPath();
         LoadColumnOfVehiclesView();
         setListViewOfVehicles();
         watcher.start();
+
+        LoadIncidentsWatcherViewController();
+        policeWatcher.start();
+        customsWatcher.start();
+
     }
     public void initPath() {
         List<Field> pathfields;
@@ -375,8 +381,11 @@ public class SimulationController  implements Initializable {
         stage.show();
     }
 
+
+
     @FXML
     void btnCustomsRecordsClick(ActionEvent event) {
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("customsRecordView.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
@@ -429,6 +438,27 @@ public class SimulationController  implements Initializable {
         }
     }
 
+    IncidentsWatcherViewController incidentsWatcherViewController;
+    Stage incidentStage;
+    private void LoadIncidentsWatcherViewController()
+    {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("incidentsWatcherView.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            incidentStage = new Stage();
+            incidentStage.setScene(new Scene(root1));
+            incidentsWatcherViewController = fxmlLoader.getController();
+
+        } catch (IOException exception) {
+            SimulationLogger.logAsync(getClass(), exception);
+        }
+    }
+    @FXML
+    void btnIncidentsClick(ActionEvent event) {
+
+        incidentStage.show();
+
+    }
     public void setTimeLabel(int time) {
         Platform.runLater(() -> lblTime.setText(time + "s"));
     }

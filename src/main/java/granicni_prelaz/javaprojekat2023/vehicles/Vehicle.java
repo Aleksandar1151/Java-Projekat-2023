@@ -82,7 +82,7 @@ public abstract class Vehicle extends Thread {
 
                     position--;
 
-                    System.out.println("Ima vozilo: " + pathfields.get(position).getVehicle());
+
                 }
 
 

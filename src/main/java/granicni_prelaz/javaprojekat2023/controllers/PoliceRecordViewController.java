@@ -56,9 +56,6 @@ public class PoliceRecordViewController {
                 if (punishedPersons != null)
                     Platform.runLater(() -> _textArea.setText(punishedPersons.toString()));
 
-
-
-
             }
         });
     }

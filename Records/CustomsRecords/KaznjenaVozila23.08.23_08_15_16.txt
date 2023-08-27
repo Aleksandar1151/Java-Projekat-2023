@@ -1,9 +1,0 @@
-P253 Dokument je validan.Kofer  ima nedozvoljene stvari.
-P257 Dokument je validan.Kofer  ima nedozvoljene stvari.
-P163 Dokument je validan.Kofer  ima nedozvoljene stvari.
-P183 Dokument je validan.Kofer  ima nedozvoljene stvari.
-P213 Dokument je validan.Kofer  ima nedozvoljene stvari.
-P215 Dokument je validan.Kofer  ima nedozvoljene stvari.
-P219 Dokument je validan.Kofer  ima nedozvoljene stvari.
-P233 Dokument je validan.Kofer  ima nedozvoljene stvari.
-P239 Dokument je validan.Kofer  ima nedozvoljene stvari.

@@ -7,6 +7,7 @@ import granicni_prelaz.javaprojekat2023.util.SimulationLogger;
 import granicni_prelaz.javaprojekat2023.util.Utils;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -24,11 +25,11 @@ public abstract class IncidentUtil {
 
         Utils.createFolderIfNotExists(Constants.LIST_OF_PUNISHED_PERSONS_DIRECTORY);
 
-        SimpleDateFormat sdf = new SimpleDateFormat(Constants.DATE_TIME_FORMAT);
-        String fileName = "KaznjeneOsobe" + sdf.format(new Date());
+        //SimpleDateFormat sdf = new SimpleDateFormat(Constants.DATE_TIME_FORMAT);
+        //String fileName = "KaznjeneOsobe" + sdf.format(new Date());
 
         try (var objectOutputStream = new ObjectOutputStream(
-                new FileOutputStream(Constants.LIST_OF_PUNISHED_PERSONS_DIRECTORY + fileName + ".ser"))) {
+                new FileOutputStream(Constants.LIST_OF_PUNISHED_PERSONS_DIRECTORY + policeFileName))) {
             objectOutputStream.writeObject(listOfPunishedPersons);
         } catch (IOException fileNotFoundException) {
             SimulationLogger.log(IncidentUtil.class, Level.SEVERE, fileNotFoundException.getMessage(), fileNotFoundException);
@@ -39,11 +40,11 @@ public abstract class IncidentUtil {
 
         Utils.createFolderIfNotExists(Constants.LIST_OF_PUNISHED_PERSONS_DIRECTORY);
 
-        SimpleDateFormat sdf = new SimpleDateFormat(Constants.DATE_TIME_FORMAT);
-        String fileName = "KaznjenaVozila" + sdf.format(new Date());
+        //SimpleDateFormat sdf = new SimpleDateFormat(Constants.DATE_TIME_FORMAT);
+        //String fileName = "KaznjenaVozila" + sdf.format(new Date());
 
         try {
-            PrintWriter out = new PrintWriter(Constants.LIST_OF_PUNISHED_VEHICLES_DIRECTORY + fileName + ".txt");
+            PrintWriter out = new PrintWriter(Constants.LIST_OF_PUNISHED_VEHICLES_DIRECTORY + customsFileName);
             for(String incidentInfo: Simulation.customsRecord) {
                 out.println(incidentInfo);
             }
@@ -66,7 +67,7 @@ public abstract class IncidentUtil {
             list = (ListOfPunishedPersons) objectInputStream.readObject();
 
         } catch (IOException | ClassNotFoundException exception) {
-            SimulationLogger.log(IncidentUtil.class, Level.SEVERE, exception.getMessage(), exception);
+            //SimulationLogger.log(IncidentUtil.class, Level.SEVERE, exception.getMessage(), exception);
         }
         return list;
     }
@@ -105,16 +106,55 @@ public abstract class IncidentUtil {
     public static void createIncidentFiles()
     {
         SimpleDateFormat sdf = new SimpleDateFormat(Constants.DATE_TIME_FORMAT);
-        policeFileName = "KaznjeneOsobe" + sdf.format(new Date());
-        customsFileName = "KaznjenaVozila" + sdf.format(new Date());
+        policeFileName = "KaznjeneOsobe" + sdf.format(new Date())+".ser";
+        customsFileName = "KaznjenaVozila" + sdf.format(new Date())+".txt";
 
     }
 
     public static void writePoliceIncidentIntoFile()
     {
+
         try (var objectOutputStream = new ObjectOutputStream(
-                new FileOutputStream(Constants.LIST_OF_PUNISHED_PERSONS_DIRECTORY + policeFileName + ".ser", false))) {
+                new FileOutputStream(Constants.LIST_OF_PUNISHED_PERSONS_DIRECTORY + policeFileName, false))) {
             objectOutputStream.writeObject(Simulation.policeRecord);
+        } catch (IOException fileNotFoundException) {
+            SimulationLogger.log(IncidentUtil.class, Level.SEVERE, fileNotFoundException.getMessage(), fileNotFoundException);
+        }
+
+
+/*
+        String tempFileName = Constants.LIST_OF_PUNISHED_PERSONS_DIRECTORY + policeFileName + ".temp";
+
+        // Write the new content to a temporary file
+        try (var objectOutputStream = new ObjectOutputStream(new FileOutputStream(tempFileName))) {
+            objectOutputStream.writeObject(Simulation.policeRecord);
+        } catch (IOException fileNotFoundException) {
+            SimulationLogger.log(IncidentUtil.class, Level.SEVERE, fileNotFoundException.getMessage(), fileNotFoundException);
+        }
+
+        // Rename the temporary file to the original filename
+        File tempFile = new File(tempFileName);
+        File newFile = new File(Constants.LIST_OF_PUNISHED_PERSONS_DIRECTORY + policeFileName);
+        if (tempFile.renameTo(newFile)) {
+            tempFile.delete();
+        }
+*/
+
+
+    }
+
+    public static void writeCustomsIncidentIntoFile()
+    {
+        try {
+            PrintWriter out = new PrintWriter(
+                    new BufferedWriter(
+                            new OutputStreamWriter(
+                                    new FileOutputStream(Constants.LIST_OF_PUNISHED_VEHICLES_DIRECTORY + customsFileName, false),
+                                    StandardCharsets.UTF_8)));
+            for (String incidentInfo : Simulation.customsRecord) {
+                out.println(incidentInfo);
+            }
+            out.close();
         } catch (IOException fileNotFoundException) {
             SimulationLogger.log(IncidentUtil.class, Level.SEVERE, fileNotFoundException.getMessage(), fileNotFoundException);
         }

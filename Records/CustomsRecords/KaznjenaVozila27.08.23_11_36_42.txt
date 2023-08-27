@@ -1,0 +1,6 @@
+P161 Dokument je validan.Kofer  ima nedozvoljene stvari.
+P166 Dokument je validan.Kofer  ima nedozvoljene stvari.
+P171 Dokument je validan.Kofer  ima nedozvoljene stvari.
+P175 Dokument je validan.Kofer  ima nedozvoljene stvari.
+P198 Dokument je validan.Kofer  ima nedozvoljene stvari.
+P217 Dokument je validan.Kofer  ima nedozvoljene stvari.

@@ -61,7 +61,7 @@ public class CustomsRecordViewController {
 
                     while ((line = bufferedReader.readLine()) != null) {
                         _textArea.appendText(line + "\n");
-                        System.out.println(line);
+
                     }
                 } catch (IOException ex) {
                     //LoggerClass.log(this.getClass(), Level.SEVERE, ex.getMessage(), ex);
