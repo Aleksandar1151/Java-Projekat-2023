@@ -31,7 +31,7 @@ public class CustomsTerminalForTrucks extends CustomsTerminal {
         printInfo("Završena obrada vozila: " + vehicle.getVehicleName());
 
         try {
-            vehicle.sleep(2000);
+            vehicle.sleep(500);
         } catch (InterruptedException e) {
            // throw new RuntimeException(e);
         }

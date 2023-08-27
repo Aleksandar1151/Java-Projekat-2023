@@ -14,6 +14,8 @@ public class ListOfPunishedPersons implements Serializable {
     public void addPerson(Person person)
     {
         persons.add(person);
+
+        IncidentUtil.writePoliceIncidentIntoFile();
     }
 
     public List<Person> getPersons() {

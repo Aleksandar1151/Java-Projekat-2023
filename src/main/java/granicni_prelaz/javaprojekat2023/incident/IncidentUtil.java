@@ -17,7 +17,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 
-public class IncidentUtil {
+public abstract class IncidentUtil {
+
+    public static String policeFileName, customsFileName;
     public static void writeListOfPunishedPersonsIntoFile(ListOfPunishedPersons listOfPunishedPersons) {
 
         Utils.createFolderIfNotExists(Constants.LIST_OF_PUNISHED_PERSONS_DIRECTORY);
@@ -98,5 +100,23 @@ public class IncidentUtil {
         for (File f : files)
             listOfFiles.add(f.getName());
         return listOfFiles;
+    }
+
+    public static void createIncidentFiles()
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat(Constants.DATE_TIME_FORMAT);
+        policeFileName = "KaznjeneOsobe" + sdf.format(new Date());
+        customsFileName = "KaznjenaVozila" + sdf.format(new Date());
+
+    }
+
+    public static void writePoliceIncidentIntoFile()
+    {
+        try (var objectOutputStream = new ObjectOutputStream(
+                new FileOutputStream(Constants.LIST_OF_PUNISHED_PERSONS_DIRECTORY + policeFileName + ".ser", false))) {
+            objectOutputStream.writeObject(Simulation.policeRecord);
+        } catch (IOException fileNotFoundException) {
+            SimulationLogger.log(IncidentUtil.class, Level.SEVERE, fileNotFoundException.getMessage(), fileNotFoundException);
+        }
     }
 }
