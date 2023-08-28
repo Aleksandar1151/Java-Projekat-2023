@@ -1,0 +1,10 @@
+P170 [Vozilo:B 3] Dokument je validan.Kofer  ima nedozvoljene stvari.
+P172 [Vozilo:B 3] Dokument je validan.Kofer  ima nedozvoljene stvari.
+P177 [Vozilo:B 3] Dokument je validan.Kofer  ima nedozvoljene stvari.
+P178 [Vozilo:B 3] Dokument je validan.Kofer  ima nedozvoljene stvari.
+P184 [Vozilo:B 3] Dokument je validan.Kofer  ima nedozvoljene stvari.
+P189 [Vozilo:B 3] Dokument je validan.Kofer  ima nedozvoljene stvari.
+P156 [Vozilo:B 2] Dokument je validan.Kofer  ima nedozvoljene stvari.
+P164 [Vozilo:B 2] Dokument je validan.Kofer  ima nedozvoljene stvari.
+P194 [Vozilo:B 3] Dokument je validan.Kofer  ima nedozvoljene stvari.
+P198 [Vozilo:B 3] Dokument je validan.Kofer  ima nedozvoljene stvari.

@@ -1,0 +1,4 @@
+P99 Dokument je validan.Kofer  ima nedozvoljene stvari.
+P101 Dokument je validan.Kofer  ima nedozvoljene stvari.
+P145 Dokument je validan.Kofer  ima nedozvoljene stvari.
+P147 Dokument je validan.Kofer  ima nedozvoljene stvari.

@@ -46,7 +46,7 @@ public class SimulationController  implements Initializable {
     public static boolean simulationPaused;
     public static boolean simulationFinished;
 
-    public static TimeCounter timeCounter;
+    public static TimeCounter timeCounter = new TimeCounter();;
     @FXML
     private Label welcomeText;
     @FXML
@@ -125,9 +125,12 @@ public class SimulationController  implements Initializable {
         simulationPaused = false;
 
         simulation = new Simulation();
+
+        timeCounter = new TimeCounter();
         watcher = new TerminalWatcher();
         policeWatcher = new PoliceRecordWatcher();
         customsWatcher = new CustomsRecordWatcher();
+
         //lblTime.setText("0s");
         //lblTerminalDescription.setText("");
         initPath();
@@ -257,10 +260,17 @@ public class SimulationController  implements Initializable {
                     SimulationLogger.log(this.getClass(), Level.SEVERE, exception.getMessage(), exception);
                 }
             }
-            timeCounter = new TimeCounter();
-            simulation.start();
-            timeCounter.start();
+
+
             simulationStarted = true;
+            SimulationController.timeCounter.start();
+            simulation.start();
+
+            //timeCounter.start();
+            //simulationStarted = true;
+            System.out.println("Zapocinje se nova simulacija.");
+            
+
         } else {
             simulationPaused = !simulationPaused;
             if (!simulationPaused) {

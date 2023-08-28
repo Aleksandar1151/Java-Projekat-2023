@@ -1,0 +1,2 @@
+-- V [K 10] P231 [Vozilo:K 10] Dokument je validan. je izbacen jer nema ispravnu carinsku dokumentaciju.
+P232 [Vozilo:K 10] Dokument je validan.

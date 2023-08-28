@@ -20,6 +20,11 @@ public class PoliceRecordWatcher extends Thread{
 
     private static final Path directory = Paths.get(Constants.LIST_OF_PUNISHED_PERSONS_DIRECTORY);
 
+    public PoliceRecordWatcher()
+    {
+        Platform.runLater(() -> IncidentsWatcherViewController.pTextArea.setText(""));
+    }
+
     @Override
     public void run(){
 

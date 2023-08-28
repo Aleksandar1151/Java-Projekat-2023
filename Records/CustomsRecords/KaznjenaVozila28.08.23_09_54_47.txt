@@ -1,0 +1,14 @@
+P166 [Vozilo:B 3] Dokument je validan.Kofer  ima nedozvoljene stvari.
+P183 [Vozilo:B 3] Dokument je validan.Kofer  ima nedozvoljene stvari.
+P189 [Vozilo:B 3] Dokument je validan.Kofer  ima nedozvoljene stvari.
+P196 [Vozilo:B 3] Dokument je validan.Kofer  ima nedozvoljene stvari.
+P214 [Vozilo:B 4] Dokument je validan.Kofer  ima nedozvoljene stvari.
+P239 [Vozilo:B 4] Dokument je validan.Kofer  ima nedozvoljene stvari.
+P240 [Vozilo:B 4] Dokument je validan.Kofer  ima nedozvoljene stvari.
+P258 [Vozilo:B 5] Dokument je validan.Kofer  ima nedozvoljene stvari.
+P291 [Vozilo:B 5] Dokument je validan.Kofer  ima nedozvoljene stvari.
+P142 [Vozilo:B 1] Dokument je validan.Kofer  ima nedozvoljene stvari.
+P151 [Vozilo:B 2] Dokument je validan.Kofer  ima nedozvoljene stvari.
+-- V [K 7] P309 [Vozilo:K 7] Dokument je validan. je izbacen jer nema ispravnu carinsku dokumentaciju.
+-- V [K 3] P302 [Vozilo:K 3] Dokument je validan. je izbacen jer nema ispravnu carinsku dokumentaciju.
+P303 [Vozilo:K 3] Dokument je validan.

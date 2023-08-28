@@ -9,7 +9,7 @@ import java.util.logging.Level;
 
 public class TimeCounter extends  Thread {
 
-    private int time = 0;
+    public int time = 0;
 
     @Override
     public void run() {
@@ -25,6 +25,7 @@ public class TimeCounter extends  Thread {
 
                 }
             }
+
             HelloApplication.simulationController.setTimeLabel(time);
             try {
                 Thread.sleep(1000);

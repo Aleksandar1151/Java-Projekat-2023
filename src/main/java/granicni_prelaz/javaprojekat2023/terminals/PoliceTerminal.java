@@ -74,7 +74,7 @@ public class PoliceTerminal extends Terminal {
             ejectPassenger(passenger);
         }
         setVehicle(null);
-        if(Simulation.queueVehicles.peek() == vehicle)
+        if(!Simulation.queueVehicles.isEmpty() && Simulation.queueVehicles.peek() == vehicle)
             Simulation.queueVehicles.remove();
     }
     @Override

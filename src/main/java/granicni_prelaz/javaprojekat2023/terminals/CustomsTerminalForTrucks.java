@@ -47,7 +47,7 @@ public class CustomsTerminalForTrucks extends CustomsTerminal {
         }
         setVehicle(null);
 
-        if(Simulation.queueVehicles.peek() == vehicle)
+        if(!Simulation.queueVehicles.isEmpty() && Simulation.queueVehicles.peek() == vehicle)
             Simulation.queueVehicles.remove();
         IncidentUtil.writeCustomsIncidentIntoFile();
     }

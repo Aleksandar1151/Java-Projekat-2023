@@ -19,6 +19,10 @@ public class CustomsRecordWatcher extends  Thread{
 
     private static final Path directory = Paths.get(Constants.LIST_OF_PUNISHED_VEHICLES_DIRECTORY);
 
+    public CustomsRecordWatcher()
+    {
+        Platform.runLater(() -> IncidentsWatcherViewController.pTextArea.setText(""));
+    }
     @Override
     public void run(){
         try

@@ -75,6 +75,8 @@ public class Simulation extends Thread {
             columnOfVehicles.get(i).start();
         }
 
+
+
         while (SimulationController.simulationStarted && !SimulationController.simulationFinished) {
 
 
@@ -103,7 +105,7 @@ public class Simulation extends Thread {
 
     private void finishGame() {
 
-        System.out.println("Simulacija Gotova");
+
 
         SimulationController.simulationStarted = false;
         SimulationController.simulationPaused = false;

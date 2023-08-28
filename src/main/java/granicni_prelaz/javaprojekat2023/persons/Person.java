@@ -48,6 +48,6 @@ public abstract class Person implements Serializable {
 
     public String toString()
     {
-        return "P"+id+" " + identificationDocument + ((suitcase == null ) ? "" : suitcase) ;
+        return "P"+id+" [Vozilo:"+ vehicleName + "] "+ identificationDocument + ((suitcase == null ) ? "" : suitcase) ;
     }
 }
