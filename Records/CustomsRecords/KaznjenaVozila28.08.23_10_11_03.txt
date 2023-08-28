@@ -1,6 +1,0 @@
--- V [K 7] P220 [Vozilo:K 7] Dokument je validan. je izbacen jer nema ispravnu carinsku dokumentaciju.
--- V [K 3] P214 [Vozilo:K 3] Dokument je validan. je izbacen jer nema ispravnu carinsku dokumentaciju.
-P215 [Vozilo:K 3] Dokument je validan.
-P120 [Vozilo:B 1] Dokument je validan.Kofer  ima nedozvoljene stvari.
-P126 [Vozilo:B 1] Dokument je validan.Kofer  ima nedozvoljene stvari.
-P162 [Vozilo:B 4] Dokument je validan.Kofer  ima nedozvoljene stvari.

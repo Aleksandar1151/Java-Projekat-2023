@@ -269,7 +269,7 @@ public class SimulationController  implements Initializable {
             //timeCounter.start();
             //simulationStarted = true;
             System.out.println("Zapocinje se nova simulacija.");
-            
+
 
         } else {
             simulationPaused = !simulationPaused;

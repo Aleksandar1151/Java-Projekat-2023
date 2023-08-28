@@ -1,6 +1,0 @@
-P170 [Vozilo:B 3] Dokument je validan.Kofer  ima nedozvoljene stvari.
-P172 [Vozilo:B 3] Dokument je validan.Kofer  ima nedozvoljene stvari.
-P177 [Vozilo:B 3] Dokument je validan.Kofer  ima nedozvoljene stvari.
-P178 [Vozilo:B 3] Dokument je validan.Kofer  ima nedozvoljene stvari.
-P184 [Vozilo:B 3] Dokument je validan.Kofer  ima nedozvoljene stvari.
-P189 [Vozilo:B 3] Dokument je validan.Kofer  ima nedozvoljene stvari.

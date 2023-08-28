@@ -1,8 +1,0 @@
-P132 [Vozilo:B 1] Dokument je validan.Kofer  ima nedozvoljene stvari.
-P146 [Vozilo:B 1] Dokument je validan.Kofer  ima nedozvoljene stvari.
-P184 [Vozilo:B 3] Dokument je validan.Kofer  ima nedozvoljene stvari.
-P188 [Vozilo:B 3] Dokument je validan.Kofer  ima nedozvoljene stvari.
-P196 [Vozilo:B 3] Dokument je validan.Kofer  ima nedozvoljene stvari.
-P209 [Vozilo:B 3] Dokument je validan.Kofer  ima nedozvoljene stvari.
-P211 [Vozilo:B 3] Dokument je validan.Kofer  ima nedozvoljene stvari.
-P169 [Vozilo:B 2] Dokument je validan.Kofer  ima nedozvoljene stvari.

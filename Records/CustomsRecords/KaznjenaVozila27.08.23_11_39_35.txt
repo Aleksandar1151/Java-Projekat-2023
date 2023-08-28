@@ -1,6 +1,0 @@
--- V [K 9] P245 Dokument nije validan. je izbacen jer nema ispravnu carinsku dokumentaciju.
-P152 Dokument je validan.Kofer  ima nedozvoljene stvari.
-P174 Dokument je validan.Kofer  ima nedozvoljene stvari.
-P190 Dokument je validan.Kofer  ima nedozvoljene stvari.
-P214 Dokument je validan.Kofer  ima nedozvoljene stvari.
-P226 Dokument je validan.Kofer  ima nedozvoljene stvari.

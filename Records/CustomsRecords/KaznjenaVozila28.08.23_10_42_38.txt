@@ -1,0 +1,2 @@
+-- V [K 10] P229 [Vozilo:K 10] Dokument je validan. je izbacen jer nema ispravnu carinsku dokumentaciju.
+P230 [Vozilo:K 10] Dokument je validan.

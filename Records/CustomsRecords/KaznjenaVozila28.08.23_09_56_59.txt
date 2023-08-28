@@ -1,8 +1,0 @@
--- V [K 5] P259 [Vozilo:K 5] Dokument je validan. je izbacen jer nema ispravnu carinsku dokumentaciju.
-P191 [Vozilo:B 4] Dokument je validan.Kofer  ima nedozvoljene stvari.
-P197 [Vozilo:B 4] Dokument je validan.Kofer  ima nedozvoljene stvari.
-P212 [Vozilo:B 4] Dokument je validan.Kofer  ima nedozvoljene stvari.
-P169 [Vozilo:B 2] Dokument je validan.Kofer  ima nedozvoljene stvari.
-P170 [Vozilo:B 2] Dokument je validan.Kofer  ima nedozvoljene stvari.
-P180 [Vozilo:B 2] Dokument je validan.Kofer  ima nedozvoljene stvari.
-P184 [Vozilo:B 2] Dokument je validan.Kofer  ima nedozvoljene stvari.
